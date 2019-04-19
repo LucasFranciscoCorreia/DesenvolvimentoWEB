@@ -1,48 +1,24 @@
-<template>
-    <div class="navilogo">
-        <div>
-            <img src="../assets/logo.png" alt="logo">
-            <h1>GreenHouse</h1>
-        </div>
-    </div>
-</template>
+<template> 
+    <div class="centered">
+        <img src="../assets/logo.png" class="logo">
+         <a class="navbar-brand" href="#">GreenHouse</a>
+    </div> 
+</template> 
+ 
+<script> 
+export default { 
+    name: 'NaviLogo' 
+} 
 
-<script>
-export default {
-    name: 'NaviLogo'
+</script> 
+ 
+<style scoped> 
+.centered{
+    text-align: center;
 }
-</script>
-
-<style scoped>
-
-.navilogo{
-    width: 25%;
-    height: 10em;
-    padding-left: 5%;
-    background-color: aqua;
-    border-style: solid;
-    border-width: 10px;
-    float: left;
-}
-
-h1{
-    float: right;
-    padding: 5%;
-    margin-top: 15%;
-    font-size: 30px;
-    background-color:gray;
-}
-
 .logo{
-    
-}
-
-img{
-    width: 40%;
     height: auto;
-    padding: 5%;    
-    float: left;
-    background-color: blueviolet;
+    width: 15%;
+    margin: 0.5%;
 }
-
-</style>
+</style> 
