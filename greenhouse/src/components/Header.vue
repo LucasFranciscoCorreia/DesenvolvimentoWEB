@@ -5,9 +5,7 @@
             <div class="ml-auto"></div>
             <div><Navibar/></div>
         </nav>
-
-        </div>
-             
+    </div>
 </template> 
  
 <script> 
