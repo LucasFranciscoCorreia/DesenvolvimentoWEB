@@ -187,20 +187,6 @@
             </div>
         </div>
 
-        <div class="py-4 row" style="background-color:#6DE16A; padding-left: 15%">
-            <div class="col-lg-5">
-                <h3 class="white-text">
-                    Pronto?
-                </h3>
-                <h1 class="white-text">
-                    Comece agora mesmo!
-                </h1>
-            </div>
-            <div class="col-lg-5">
-                <div class="input-group-append" style="padding-top:5%">
-                    <button class="btn btn-md btn-dark" type="button">Sign up</button>
-                </div>
-            </div>
-        </div>
+        
     </main>
 </template>

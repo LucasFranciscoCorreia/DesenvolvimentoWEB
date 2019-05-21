@@ -1,5 +1,7 @@
 <template>
+
   <main>
+                  
     <div id="banner_home" style="background-color: #0EBE57; color: white;">
       <div class="row">
         <div class="col-sm-6 col-md-6 col-lg-6" style="margin:auto;">
@@ -22,7 +24,8 @@
               </p>
             </div>
             <div class="row">
-              <button type="button" class="btn btn-dark" style="margin:auto;">Sign up</button>
+
+    <button type="button" class="btn btn-dark"  style="margin:auto;" @click="$modal.show('demo-login')">Sign up</button>
             </div>
           </div>
         </div>
@@ -91,28 +94,22 @@
       </div>
     </div>
 
-    <div v-if="!isLogged" id="banner_home" class="py-4" style="background-color: #0EBE57;color: white;">
-      <div class="container">
-        <div class="row" style="margin:auto;">
-          <div class="col-sm-6 col-md-6 col-lg-6">
-            <h3>Pronto?</h3>
-            <h2>Comece agora mesmo!</h2>
-          </div>
-          <div class="col-sm-6 col-md-6 col-lg-6" style="margin:auto;">
-            <button type="button" class="btn btn-dark">Sign up</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    
   </main>
 </template>
 
 <script>
+  import SignUp from './SignUp.vue'
+
 export default {
   name: "Inicio",
+  components:{
+    SignUp,
+  },
   props:{
     isLogged: Boolean
-  }
+  },
+
 };
 </script>
 

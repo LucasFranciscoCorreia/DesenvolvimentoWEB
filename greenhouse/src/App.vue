@@ -160,6 +160,19 @@ aria-labelledby="navbarDropdownMenuLink-4"
 </div>
 </nav>
 <component :is="selected" :isLogged="isLogged"></component>
+<div v-if="!isLogged" id="banner_home" class="py-4" style="background-color: #0EBE57;color: white;">
+      <div class="container">
+        <div class="row" style="margin:auto;">
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <h3>Pronto?</h3>
+            <h2>Comece agora mesmo!</h2>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-6" style="margin:auto;">
+          <BotaoSignUp/>
+          </div>
+        </div>
+      </div>
+    </div>
 <footer class="page-footer font-small unique-color-dark py-1">
   <!-- Footer Links -->
   <div class="container text-center text-md-left mt-5">
@@ -262,6 +275,7 @@ aria-labelledby="navbarDropdownMenuLink-4"
 </template>
 
 <script>
+  import BotaoSignUp from './components/BotaoSignUp.vue'
   import Inicio from "./components/Inicio.vue";
   import Sobre from "./components/Sobre.vue";
   import MinhaConta from "./components/MinhaConta.vue"
@@ -285,7 +299,8 @@ export default {
     ServicoNLogado,
     ServicoLogado,
     ProdutoNLogado,
-    ProdutoLogado
+    ProdutoLogado,
+    BotaoSignUp
   },
   data: () => {
     return {
