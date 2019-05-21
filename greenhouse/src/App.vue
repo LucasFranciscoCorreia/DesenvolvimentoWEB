@@ -25,7 +25,7 @@
               class="dropdown-menu dropdown-menu-right dropdown-info"
               aria-labelledby="navbarDropdownMenuLink-4"
             >
-              <a class="dropdown-item" href="#">Minha conta</a>
+              <a class="dropdown-item" href="#" v-on:click="selected='MinhaConta'">Minha conta</a>
               <a class="dropdown-item" href="#" v-on:click='logout()'>Sair</a>
             </div>
           </li>
@@ -216,6 +216,7 @@
 <script>
 import Inicio from "./components/Inicio.vue";
 import Sobre from "./components/Sobre.vue";
+import MinhaConta from "./components/MinhaConta.vue"
 
 // class User{
 //   constructor(email, password, name){
@@ -228,7 +229,8 @@ export default {
   name: "app",
   components: {
     Inicio,
-    Sobre
+    Sobre,
+    MinhaConta
   },
   data: () => {
     return {
@@ -244,9 +246,11 @@ export default {
   methods: {
     loginIn(){
       this.isLogged=true
+      this.selected="MinhaConta"
     },
     logout(){
       this.isLogged=false
+      this.selected="Inicio"
     }
   }
 };
