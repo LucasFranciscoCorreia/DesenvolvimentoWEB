@@ -49,12 +49,12 @@
           </p>
         </div>
         <div class="col-sm-5 col-md-5 col-lg-5">
-          <img src="assets/browser.png" height="428">
+          <img src="assets/browser.png" class="image">
         </div>
       </div>
       <div class="row">
         <div class="col-sm-5 col-md-5 col-lg-5">
-          <img src="assets/app.png" height="428em">
+          <img src="assets/app.png" class="image">
         </div>
         <div class="col-sm-6 col-md-6 col-lg-6">
           <br>
@@ -86,7 +86,7 @@
           </p>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-6">
-          <img src="assets/trash.png" height="428em">
+          <img src="assets/trash.png" class="image">
         </div>
       </div>
     </div>
@@ -124,5 +124,12 @@ export default {
 
 .centered {
   text-align: center;
+}
+
+.image{
+  width: 100%;
+  max-width: 25em;
+  margin:auto;
+  padding: auto;
 }
 </style>
