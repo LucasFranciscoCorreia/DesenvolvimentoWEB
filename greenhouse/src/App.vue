@@ -2,18 +2,18 @@
   <div id="app">
     <nav class="navbar navbar-expand-lg navbar-light mr-auto">
       <div class="collapse navbar-collapse ml-auto" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto">         
           <li
             v-for="tab in tabs"
             :key="tab"
-            @click="selected=tab"
-            :class="['nav-item',{active: selected == tab}]"
+            :class="['nav-item',{active: getRoute() == tab.name}]"
           >
-            <a :class="['nav-link',{disabled: selected==tab}]">{{tab}}</a>
+            <a :class="['nav-link',{disabled: getRoute() == tab.name}]" :href="tab.content">{{tab.name}}</a>
+            
           </li>
           <li v-if="isLogged" class="nav-item dropdown">
             <a
-              class="nav-link dropdown-toggle"
+              class="nav-link dropdown-togogle"
               id="navbarDropdownMenuLink-4"
               data-toggle="dropdown"
               aria-haspopup="true"
@@ -111,14 +111,15 @@
         </ul>
       </div>
     </nav>
-    <component :is="selected" :isLogged="isLogged"></component>
+    <!-- <component :is="selected" :isLogged="isLogged"></component> -->
+     <router-view></router-view>
     <footer class="page-footer font-small unique-color-dark py-1">
       <!-- Footer Links -->
       <div class="container text-center text-md-left mt-5">
         <!-- Grid row -->
         <div class="row mt-3">
           <!-- Grid column -->
-          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
             <!-- Content -->
             <h6 class="text-uppercase font-weight-bold">GreenHouse</h6>
             <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
@@ -180,7 +181,7 @@
                 aria-describedby="basic-addon2"
               >
               <div class="input-group-append">
-                <button class="btn btn-sm btn-outline-white my-0" type="button">Subscribe</button>
+                <button class="btn btn-sm btn-outline-white my-0" type="button" style="border-radius: 0.5rem">Subscribe</button>
               </div>
             </form>
             <br>
@@ -214,9 +215,9 @@
 </template>
 
 <script>
-import Inicio from "./components/Inicio.vue";
-import Sobre from "./components/Sobre.vue";
-import MinhaConta from "./components/MinhaConta.vue"
+// import Inicio from "./components/Inicio.vue";
+// import Sobre from "./components/Sobre.vue";
+// import MinhaConta from "./components/MinhaConta.vue"
 
 // class User{
 //   constructor(email, password, name){
@@ -228,14 +229,13 @@ import MinhaConta from "./components/MinhaConta.vue"
 export default {
   name: "app",
   components: {
-    Inicio,
-    Sobre,
-    MinhaConta
+    // Inicio,
+    // Sobre,
+    // MinhaConta
   },
   data: () => {
     return {
-      tabs: ["Inicio", "Sobre"],
-      selected: "Inicio",
+      tabs: [{name:"Inicio", content:"/"}, {name:"Sobre", content:"/sobre"}],
       isLogged: false,
       email: "",
       password: "",
@@ -246,11 +246,14 @@ export default {
   methods: {
     loginIn(){
       this.isLogged=true
-      this.selected="MinhaConta"
+      this.selected="/user/123"
     },
     logout(){
       this.isLogged=false
-      this.selected="Inicio"
+      this.selected="/"
+    },
+    getRoute(){
+      return this.$router.currentRoute.name
     }
   }
 };
@@ -260,5 +263,4 @@ export default {
 #app {
 
 }
-
 </style>
