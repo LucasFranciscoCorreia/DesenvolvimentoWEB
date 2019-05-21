@@ -30,14 +30,14 @@
       </div>
     </div>
     <div>
+      <h1 class="exp py-5">
+        <strong>Como funciona?</strong>
+      </h1>
       <div class="row">
         <div class="col-sm-1 col-md-1 col-lg-1"></div>
-        <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="col-sm-6 col-md-6 col-lg-6 exp">
           <br>
           <br>
-          <h1>
-            <strong>Como funciona?</strong>
-          </h1>
           <br>
           <h3>
             <strong>Se inscreva</strong>
@@ -56,7 +56,7 @@
         <div class="col-sm-5 col-md-5 col-lg-5">
           <img src="assets/app.png" class="image">
         </div>
-        <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="col-sm-6 col-md-6 col-lg-6 exp">
           <br>
           <br>
           <h3>
@@ -73,7 +73,7 @@
 
       <div class="row">
         <div class="col-sm-1 col-md-1 col-lg-1"></div>
-        <div class="col-sm-5 col-md-5 col-lg-5">
+        <div class="col-sm-5 col-md-5 col-lg-5 exp">
           <br>
           <br>
           <h3>
@@ -126,10 +126,17 @@ export default {
   text-align: center;
 }
 
-.image{
+.image {
   width: 100%;
   max-width: 25em;
-  margin:auto;
-  padding: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.exp {
+  text-align: center;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
 }
 </style>
