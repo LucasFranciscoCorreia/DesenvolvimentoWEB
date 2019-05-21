@@ -1,0 +1,69 @@
+<template>
+  <div>
+    <div v-for="(item,index) in carouselItems" :key="index" :class="['carousel-item', {active: selected==index}]">
+      <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="card mb-2">
+          <img class="card-img-top" alt="Card image cap" :src="item.src">
+          <div class="card-body">
+            <h4 class="card-title font-weight-bold">{{item.title}}</h4>
+            <p class="card-text">{{item.text}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+class Carousel {
+  constructor(title, text, src) {
+    this.title = title;
+    this.text = text;
+    this.src = src;
+  }
+}
+export default {
+  name: "CarouselParceiros",
+  data: () => {
+    return {
+      carouselItems: [
+        new Carousel(
+          "Card Title",
+          "Some text here",
+          "assets/parceiros/parceiro1.png"
+        ),
+        new Carousel(
+          "Card Title",
+          "Some text here",
+          "assets/parceiros/parceiro2.png"
+        ),
+        new Carousel(
+          "Card Title",
+          "Some text here",
+          "assets/parceiros/parceiro3.png"
+        ),
+        new Carousel(
+          "Card Title",
+          "Some text here",
+          "assets/parceiros/parceiro4.png"
+        ),
+        new Carousel(
+          "Card Title",
+          "Some text here",
+          "assets/parceiros/parceiro5.png"
+        ),
+        new Carousel(
+          "Card Title",
+          "Some text here",
+          "assets/parceiros/parceiro6.png"
+        )
+      ],
+      selected: 0
+    };
+  }
+};
+</script>
+
+<style scoped>
+
+</style>

@@ -13,15 +13,17 @@
               <span class="focus">Salva</span> o meio ambiente
             </p>
           </div>
-          <div class="row">
-            <br>
-            <br>
-            <p style="margin:auto;">
-              <strong>Se inscreva e faça parte da comunidade</strong>
-            </p>
-          </div>
-          <div class="row">
-            <button type="button" class="btn btn-dark" style="margin:auto;">Sign up</button>
+          <div v-if="!isLogged">
+            <div class="row">
+              <br>
+              <br>
+              <p style="margin:auto;">
+                <strong>Se inscreva e faça parte da comunidade</strong>
+              </p>
+            </div>
+            <div class="row">
+              <button type="button" class="btn btn-dark" style="margin:auto;">Sign up</button>
+            </div>
           </div>
         </div>
         <div class="col-sm-6">
@@ -30,9 +32,7 @@
       </div>
     </div>
     <div>
-      <h1 class="exp py-5">
-        <strong>Como funciona?</strong>
-      </h1>
+      <h1 class="exp py-5">Como funciona?</h1>
       <div class="row">
         <div class="col-sm-1 col-md-1 col-lg-1"></div>
         <div class="col-sm-6 col-md-6 col-lg-6 exp">
@@ -91,7 +91,7 @@
       </div>
     </div>
 
-    <div id="banner_home" class="py-4" style="background-color: #0EBE57;color: white;">
+    <div v-if="!isLogged" id="banner_home" class="py-4" style="background-color: #0EBE57;color: white;">
       <div class="container">
         <div class="row" style="margin:auto;">
           <div class="col-sm-6 col-md-6 col-lg-6">
@@ -109,7 +109,10 @@
 
 <script>
 export default {
-  name: "Inicio"
+  name: "Inicio",
+  props:{
+    isLogged: Boolean
+  }
 };
 </script>
 

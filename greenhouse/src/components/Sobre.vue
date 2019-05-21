@@ -1,10 +1,10 @@
 <template>
   <main>
     <div class="row py-4" style="background-color:#6DE16A">
-      <div class="container col-lg-4 ml-auto">
-        <img src="assets/planet.png" alt="planet" width="300px">
+      <div class="container col-lg-5 ml-auto">
+        <img src="assets/planet.png" alt="planet" class="image">
       </div>
-      <div class="container col-lg-8 mr-auto">
+      <div class="container col-lg-7 mr-auto exp">
         <img src="assets/about.png" alt="about" height="150px">
         <p class="white-text" style="font-size: 60px;font-weight: bold;font-family: Lato">
           <b>
@@ -15,9 +15,9 @@
       </div>
     </div>
     <div class="row">
-      <div class="px-5 col-lg-5 col-md-5 col-sm-5">
+      <div class="px-5 col-lg-5 col-md-5 col-sm-5 exp">
         <h1 style="text-align: center">Nosso Objetivo</h1>
-        <p class="font-small" style="text-align:center">
+        <p class="font-small">
           Gag ipsum dolar sit amet close enough i lied anonymous herp derp. Aww Yeah 9000 weekend joke
           hammer
           like
@@ -42,7 +42,7 @@
         </p>
       </div>
       <div class="ml-auto col-lg-5">
-        <img src="assets/logo.png" alt="logo" class="ml-auto" height="300em">
+        <img src="assets/logo.png" alt="logo" class="ml-auto image">
       </div>
     </div>
 
@@ -63,100 +63,10 @@
         </a>
       </div>
       <div class="carousel-inner v-2" style="padding-left:33%" role="listbox">
-        <div class="carousel-item active">
-          <div class="col-md-6">
-            <div class="card mb-2">
-              <img class="card-img-top" src="assets/parceiros/parceiro1.png" alt="Card image cap">
-              <div class="card-body">
-                <h4 class="card-title font-weight-bold">Card title</h4>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the
-                  bulk of the
-                  card's content.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="col-md-6">
-            <div class="card mb-2">
-              <img class="card-img-top" src="assets/parceiros/parceiro2.png" alt="Card image cap">
-              <div class="card-body">
-                <h4 class="card-title font-weight-bold">Card title</h4>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the
-                  bulk of the
-                  card's content.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="col-md-6">
-            <div class="card mb-2">
-              <img class="card-img-top" src="assets/parceiros/parceiro3.png" alt="Card image cap">
-              <div class="card-body">
-                <h4 class="card-title font-weight-bold">Card title</h4>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the
-                  bulk of the
-                  card's content.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="col-md-6">
-            <div class="card mb-2">
-              <img class="card-img-top" src="assets/parceiros/parceiro4.png" alt="Card image cap">
-              <div class="card-body">
-                <h4 class="card-title font-weight-bold">Card title</h4>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the
-                  bulk of the
-                  card's content.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="col-md-6">
-            <div class="card mb-2">
-              <img class="card-img-top" src="assets/parceiros/parceiro5.png" alt="Card image cap">
-              <div class="card-body">
-                <h4 class="card-title font-weight-bold">Card title</h4>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the
-                  bulk of the
-                  card's content.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="col-md-6">
-            <div class="card mb-2">
-              <img class="card-img-top" src="assets/parceiros/parceiro6.png" alt="Card image cap">
-              <div class="card-body">
-                <h4 class="card-title font-weight-bold">Card title</h4>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the
-                  bulk of the
-                  card's content.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <CarouselParceiros />
       </div>
     </div>
-
-    <div class="py-4 row" style="background-color:#6DE16A; padding-left: 15%">
+    <div v-if="!isLogged" class="py-4 row" style="background-color:#6DE16A; padding-left: 15%">
       <div class="col-lg-5">
         <h3 class="white-text">Pronto?</h3>
         <h1 class="white-text">Comece agora mesmo!</h1>
@@ -171,11 +81,31 @@
 </template>
 
 <script>
+import CarouselParceiros from "./CarouselParceiros.vue";
 export default {
-    name: "Sobre"
+  name: "Sobre",
+  components: {
+    CarouselParceiros
+  },
+  props: {
+    isLogged: Boolean
+  }
 };
 </script>
 
 <style scoped>
+.image {
+  width: 100%;
+  max-width: 25em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.exp {
+  text-align: center;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
 </style>
 
