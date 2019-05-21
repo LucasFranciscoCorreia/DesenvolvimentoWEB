@@ -3,10 +3,10 @@
     <div v-for="(item,index) in carouselItems" :key="index" :class="['carousel-item', {active: selected==index}]">
       <div class="col-sm-6 col-md-6 col-lg-6">
         <div class="card mb-2">
-          <img class="card-img-top" alt="Card image cap" :src="item.src">
+          <img class="image card-img-top" alt="Card image cap" :src="item.src">
           <div class="card-body">
-            <h4 class="card-title font-weight-bold">{{item.title}}</h4>
-            <p class="card-text">{{item.text}}</p>
+            <h4 class="exp card-title font-weight-bold">{{item.title}}</h4>
+            <p class="exp card-text">{{item.text}}</p>
           </div>
         </div>
       </div>
@@ -65,5 +65,17 @@ export default {
 </script>
 
 <style scoped>
-
+.image {
+  width: 100%;
+  max-width: 25em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.exp {
+  text-align: center;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
 </style>
