@@ -5,79 +5,10 @@
     <nav class="navbar navbar-expand-lg navbar-light mr-auto">
       <div class="collapse navbar-collapse ml-auto" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-          <div v-for="tab in tabs" :key="tab">
-            <div v-if="isLogged && (tab.name == 'Serviço' || tab.name=='Produtos')">
-              <li
-                v-if="tab.name =='Serviço'"
-                :class="['nav-item',{active: getRoute() == 'ServicoLogado'}]"
-              >
-                <a
-                  :class="['nav-link',{disabled: getRoute()=='ServicoLogado'}]"
-                  :href="'/servicosUser'"
-                >Serviços</a>
-              </li>
-
-              <li
-                v-else-if="tab.name =='Produtos'"
-                :class="['nav-item',{active: getRoute() == 'ProdutoLogado'}]"
-              >
-                <a
-                  :class="['nav-link',{disabled: getRoute()=='ProdutoLogado'}]"
-                  :href="'/produtosUser'"
-                >Produtos</a>
-              </li>
-            </div>
-            <div v-else-if="!isLogged && (tab.name == 'Serviço' || tab.name=='Produtos')">
-              <li
-                v-if="tab.name=='Serviço'"
-                :key="ServicoNLogado"
-                :class="['nav-item',{active: getRoute() == 'ServicoNLogado'}]"
-              >
-                <a
-                  :class="['nav-link',{disabled: getRoute()=='ServicoNLogado'}]"
-                  :href="'/servicos'"
-                >Serviços</a>
-              </li>
-              <li
-                v-if="tab.name=='Produtos'"
-                :key="ProdutoNLogado"
-                :class="['nav-item',{active: getRoute() == 'ProdutoNLogado'}]"
-              >
-                <a
-                  :class="['nav-link',{disabled: getRoute()=='ProdutoNLogado'}]"
-                  :href="'/produtos'"
-                >Produtos</a>
-              </li>
-            </div>
-            <div v-else>
-              <li :key="tab" :class="['nav-item',{active: getRoute() == tab.name}]">
-                <a
-                  :class="['nav-link',{disabled: getRoute() == tab.name}]"
-                  :href="tab.content"
-                >{{tab.name}}</a>
-              </li>
-            </div>
+          <div  v-for="tab in tabs" :key="tab">
+            <NaviItem :tab="tab" :isLogged="isLogged" />
           </div>
-
-          <li v-if="isLogged" class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-togogle"
-              id="navbarDropdownMenuLink-4"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <i class="fas fa-user"></i> Maria M
-            </a>
-            <div
-              class="dropdown-menu dropdown-menu-right dropdown-info"
-              aria-labelledby="navbarDropdownMenuLink-4"
-            >
-              <a class="dropdown-item" href="#" v-on:click="getRoute()=='MinhaConta'":href="'/minhaConta'">Minha conta</a>
-              <a class="dropdown-item" href="#" v-on:click='logout()'>Sair</a>
-            </div>
-          </li>
-          <li v-else class="nav-item dropdown">
+          <li v-if="!isLogged" class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
               id="navbarDropdownMenuLink-4"
@@ -143,8 +74,7 @@
                       class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0"
                       type="submit"
                       style="border-radius: 2rem"
-                      v-on:click="loginIn()"
-                    >Sign in</button>
+                    ><a  v-on:click="loginIn()" href="/user">Sign in</a></button>
 
                     <!-- Register -->
                     <p>
@@ -287,25 +217,12 @@
 </template>
 
 <script>
-import BotaoSignUp from "./components/BotaoSignUp.vue";
-// import Inicio from "./components/Inicio.vue";
-// import Sobre from "./components/Sobre.vue";
-// import MinhaConta from "./components/MinhaConta.vue"
+import NaviItem from "./components/NavItem"
 
-// class User{
-//   constructor(email, password, name){
-//     this.email = email;
-//     this.password = password;
-//     this.name = name;
-//   }
-// }
 export default {
   name: "app",
   components: {
-    // Inicio,
-    // Sobre,
-    // MinhaConta
-    BotaoSignUp
+    NaviItem
   },
   data: () => {
     return {
@@ -325,11 +242,10 @@ export default {
   methods: {
     loginIn() {
       this.isLogged = true;
-      this.selected = "/user/123";
+
     },
     logout() {
       this.isLogged = false;
-      this.selected = "/";
     },
     getRoute() {
       return this.$router.currentRoute.name;

@@ -1,19 +1,17 @@
+
 <template>
   <main>
     <div class="row py-4" style="background-color:#63CF67">
       <div class="container col-lg-4 ml-auto">
         <img src="assets/tools.png" alt="tools" width="100px">
       </div>
-
       <p class="gray-text" style="font-size: 50px;font-weight: bold;font-family: Lato">
         <b>Contrate um serviço</b>
       </p>
-
       <div class="container col-lg-4 ml-auto">
         <img src="assets/naturehands.png" alt="naturehands" width="100px">
       </div>
     </div>
-
     <div class="jumbotron">
       <div class="row">
         <div class="card mx-auto text-center" style="width: 18rem;">
@@ -64,3 +62,8 @@
     </div>
   </main>
 </template>
+<script>
+export default {
+  name: "ServicoLogado"
+}
+</script>

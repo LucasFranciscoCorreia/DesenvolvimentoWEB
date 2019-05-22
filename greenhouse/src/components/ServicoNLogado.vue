@@ -16,7 +16,7 @@
         <img src="assets/naturehands.png" alt="naturehands" width="100px">
       </div>
     </div>
-    <div class="jumbotron">
+    <div class="py-5">
       <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-3"></div>
         <div class="col-lg-6 col-md-6 col-sm-6">
@@ -117,8 +117,7 @@
 </template>
 <script>
 export default {
-  name: "Servico",
-
+  name: "ServicoNLogado",
   props: {
     isLogged: Boolean
   }
