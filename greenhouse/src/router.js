@@ -44,6 +44,11 @@ export default new Router({
         name: "ServicoNLogado",
         component: ServicoNLogado
     },
+    {
+        path: "/minhaConta",
+        name: "MinhaConta",
+        component: MinhaConta
+    },
 
     {
         path: "user/123",
