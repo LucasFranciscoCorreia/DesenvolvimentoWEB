@@ -1,7 +1,8 @@
 <template>
   <li :class="['nav-item',{active: getRoute() == getName()}]">
-    <a :class="['nav-link',{disabled: getRoute()== getName()}]" :href="getContent()">
-        {{tab.name}}
+    <a :href="getContent()" :class="['nav-link',{disabled: getRoute()== getName()}]">
+      <!-- <router-link :to="getContent()">{{tab.name}}</router-link> -->
+      {{tab.name}}
     </a>
   </li>
 </template>
@@ -10,7 +11,7 @@
 export default {
   name: "NaviItem",
   props: {
-    isLogged: Object,
+    isLogged: Array,
     tab: Object
   },
   methods: {

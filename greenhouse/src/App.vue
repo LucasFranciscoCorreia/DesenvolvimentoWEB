@@ -7,9 +7,9 @@
         <ul class="navbar-nav ml-auto">
           <button v-on:click="logged()">isLogged?</button>
           <div v-for="tab in tabs" :key="tab">
-            <NaviItem :tab="tab" :isLogged="isLogged"/>
+            <NaviItem :tab="tab" :isLogged="logged()"/>
           </div>
-          <li v-if="isLogged" :key="isLogged" class="nav-item dropdown">
+          <li v-if="logged()" :key="isLogged[0]" class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
               id="navbarDropdownMenuLink-4"
@@ -240,7 +240,6 @@
 <script>
 import NaviItem from "./components/NavItem";
 import BotaoSignUp from "./components/BotaoSignUp";
-import { loggedIn } from "./main";
 
 export default {
   name: "app",
@@ -254,33 +253,34 @@ export default {
         { name: "Inicio", content: "/" },
         { name: "Sobre", content: "/sobre" },
         { name: "Produtos", content: "/produtos" },
-        { name: "Serviços", content: "/servicos" }
+        { name: "Serviços", content: "/servicos" },
+        { name: "Contato", content: "/contato"}
       ],
-      isLogged: loggedIn.is,
+      isLogged: true,
       email: "",
       password: "",
       user: "",
       users: []
     };
   },
+  computed: {
+    
+  },
   methods: {
     logged() {
-      alert(loggedIn.is)
-      loggedIn.is = true
-      alert(loggedIn.is)
-      alert(this.isLogged);
-      return this.isLogged;
+      // alert(this.$router.currentRoute.name)
+      return this.isLogged
     },
     loginIn() {
-      loggedIn.is = true;
+      
     },
     logout() {
-      loggedIn.is = false;
+      
     },
     getRoute() {
       return this.$router.currentRoute.name;
     }
-  }
+  },
 };
 </script>
 

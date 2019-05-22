@@ -156,7 +156,7 @@
 export default {
     name: "MinhaConta",
     props: {
-        isLogged: Boolean
+        isLogged: Array
     }
 };
 </script>

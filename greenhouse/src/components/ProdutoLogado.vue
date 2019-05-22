@@ -1,7 +1,7 @@
 <template>
 	<main>
         <div class="py-4 row" style="background-color: #63CF67">
-            <div class="col-lg-2 col-md-2 col-sm-2text-center">
+            <div class="col-lg-2 col-md-2 col-sm-2 text-center">
                 <img src="assets/plant.png" alt="plant1">
             </div>
             <div class="col-lg-8 col-md-8 col-sm-8">
@@ -36,80 +36,48 @@
                 <h3 class="title"><span>Destaques</span></h3>
                 <div>
                     <ul>
-                        <li>this is a list item</li>
-                        <li>this is a list item</li>
-                        <li>this is a list item</li>
-                        <li>this is a list item</li>
-                        <li>this is a list item</li>
-                        <li>this is a list item</li>
-                        <li>this is a list item</li>
-                        <li>this is a list item</li>
-                        <li>this is a list item</li>
-                        <li>this is a list item</li>
-                        <li>this is a list item</li>
-                        <li>this is a list item</li>
-                        <li>this is a list item</li>
-                        <li>this is a list item</li>
-                        <li>this is a list item</li>
+                        <li v-for="i in (0, 15)" :key="i">this is a list item</li>
                     </ul>
                 </div>
             </div>
             <div class="col-lg-9">
-                <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-4">
-                        <div class="card mb-2">
-                            <img class="card-img-top" src="assets/decomposer.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-text">Some quick example text to build</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4">
-                        <div class="card mb-2">
-                            <img class="card-img-top" src="assets/compost.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-text">Some quick example text to build</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4">
-                        <div class="card mb-2">
-                            <img class="card-img-top" src="assets/HomeBiogas.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-text">Some quick example text to build</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-4">
-                        <div class="card mb-2">
-                            <img class="card-img-top" src="assets/decomposer.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-text">Some quick example text to build</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4">
-                        <div class="card mb-2">
-                            <img class="card-img-top" src="assets/compost.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-text">Some quick example text to build</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4">
-                        <div class="card mb-2">
-                            <img class="card-img-top" src="assets/HomeBiogas.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-text">Some quick example text to build</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                
+                    <Produto :items="items"/>
+                
             </div>
         </div>
     </main>
 </template>
+
+<script>
+import Produto from "./Produto.vue"
+
+class ProdutoItem{
+    constructor(src, text){
+        this.src = src;
+        this.text = text
+    }
+}
+export default {
+    name: "ProdutoLogado",
+    components: {
+        Produto
+    },
+    data:() => {
+        return{
+            items: [
+                new ProdutoItem("assets/decomposer.jpg", "Some text here"),
+                new ProdutoItem("assets/compost.jpg", "Some text here"),
+                new ProdutoItem("assets/HomeBiogas.jpg", "Some text here"),
+                new ProdutoItem("assets/decomposer.jpg", "Some text here"),
+                new ProdutoItem("assets/compost.jpg", "Some text here"),
+                new ProdutoItem("assets/HomeBiogas.jpg", "Some text here")
+            ]
+        }
+    }
+}
+</script>
+
+<style scoped>
+
+</style>

@@ -63,22 +63,66 @@
         </a>
       </div>
       <div class="carousel-inner v-2" style="padding-left:33%" role="listbox">
-        <CarouselParceiros />
+        <Carousel :carouselItems="items" />
       </div>
     </div>
-    
   </main>
 </template>
 
 <script>
-import CarouselParceiros from "./CarouselParceiros.vue";
+import Carousel from "./Carousel.vue";
+
+class CarouselItem{
+  constructor(title, text, src) {
+    this.title = title;
+    this.text = text;
+    this.src = src;
+  }
+}
+
 export default {
   name: "Sobre",
   components: {
-    CarouselParceiros
+    Carousel
   },
   props: {
     isLogged: Boolean
+  },
+  data: () => {
+    return {
+      items: [
+        new CarouselItem(
+          "Card Title",
+          "Some text here",
+          "assets/parceiros/parceiro1.png"
+        ),
+        new CarouselItem(
+          "Card Title",
+          "Some text here",
+          "assets/parceiros/parceiro2.png"
+        ),
+        new CarouselItem(
+          "Card Title",
+          "Some text here",
+          "assets/parceiros/parceiro3.png"
+        ),
+        new CarouselItem(
+          "Card Title",
+          "Some text here",
+          "assets/parceiros/parceiro4.png"
+        ),
+        new CarouselItem(
+          "Card Title",
+          "Some text here",
+          "assets/parceiros/parceiro5.png"
+        ),
+        new CarouselItem(
+          "Card Title",
+          "Some text here",
+          "assets/parceiros/parceiro6.png"
+        )
+      ]
+    };
   }
 };
 </script>
