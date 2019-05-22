@@ -218,11 +218,13 @@
 
 <script>
 import NaviItem from "./components/NavItem"
+import BotaoSignUp from "./components/BotaoSignUp"
 
 export default {
   name: "app",
   components: {
-    NaviItem
+    NaviItem,
+    BotaoSignUp
   },
   data: () => {
     return {
