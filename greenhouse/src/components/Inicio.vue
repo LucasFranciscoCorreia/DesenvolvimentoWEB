@@ -103,8 +103,7 @@
 
 export default {
   name: "Inicio",
-  components: {
-
+  components:{
   },
   props: {
     isLogged: Boolean

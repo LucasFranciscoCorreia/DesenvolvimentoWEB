@@ -73,8 +73,8 @@
               class="dropdown-menu dropdown-menu-right dropdown-info"
               aria-labelledby="navbarDropdownMenuLink-4"
             >
-              <a class="dropdown-item" href="#" v-on:click="selected='MinhaConta'">Minha conta</a>
-              <a class="dropdown-item" href="#" v-on:click="logout()">Sair</a>
+              <a class="dropdown-item" href="#" v-on:click="getRoute()=='MinhaConta'":href="'/minhaConta'">Minha conta</a>
+              <a class="dropdown-item" href="#" v-on:click='logout()'>Sair</a>
             </div>
           </li>
           <li v-else class="nav-item dropdown">
