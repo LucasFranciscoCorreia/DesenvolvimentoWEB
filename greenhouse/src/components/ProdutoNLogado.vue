@@ -1,10 +1,10 @@
 <template>
   <main>
     <div class="row py-4" style="background-color:#63CF67">
-      <div class="container col-lg-4 ml-auto">
+      <div class="col-lg-4 col-md-4 col-sm-4 ml-auto">
         <img src="assets/house.png" alt="house" width="300px">
       </div>
-      <div class="container col-lg-8 mr-auto">
+      <div class="col-lg-8 col-md-8 col-sm-8 mr-auto">
         <img src="assets/our_products.png" alt="Produtos" height="100px">
         <p class="white-text" style="font-size: 60px;font-weight: bold;font-family: Lato">
           <b>

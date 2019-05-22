@@ -1,15 +1,15 @@
-
-
 <template>
   <div id="app">
     <nav class="navbar navbar-expand-lg navbar-light mr-auto">
       <div class="collapse navbar-collapse ml-auto" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-          <button v-on:click="logged()">isLogged?</button>
           <div v-for="tab in tabs" :key="tab">
-            <NaviItem :tab="tab" :isLogged="logged()"/>
+            <!-- <NaviItem :tab="tab" :isLogged="isLogged" :store="store"/> -->
+            <li :class="['nav-item',{active: selected == tab}]">
+              <a :class="['nav-link',{disabled: selected == tab}]" @click="selected = tab">{{tab}}</a>
+            </li>
           </div>
-          <li v-if="logged()" :key="isLogged[0]" class="nav-item dropdown">
+          <li v-if="isLogged" class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
               id="navbarDropdownMenuLink-4"
@@ -23,11 +23,11 @@
               class="dropdown-menu dropdown-menu-right dropdown-info"
               aria-labelledby="navbarDropdownMenuLink-4"
             >
-              <a class="dropdown-item" href="/user">Minha conta</a>
-              <a class="dropdown-item" href="/" @click="logout()">Sair</a>
+              <a class="dropdown-item" @click="selected='MinhaConta'" >Minha conta</a>
+              <a class="dropdown-item" @click="logout(); selected='Inicio'">Sair</a>
             </div>
           </li>
-          <li v-else :key="isLogged" class="nav-item dropdown">
+          <li v-else class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
               id="navbarDropdownMenuLink-4"
@@ -84,7 +84,7 @@
                       </div>
                       <div>
                         <!-- Forgot password -->
-                        <a href>Forgot password?</a>
+                        <a>Forgot password?</a>
                       </div>
                     </div>
 
@@ -94,13 +94,13 @@
                       type="submit"
                       style="border-radius: 2rem"
                     >
-                      <a v-on:click="loginIn()" href="/user">Sign in</a>
+                      <a v-on:click="login(); selected = 'MinhaConta'" >Sign in</a>
                     </button>
 
                     <!-- Register -->
                     <p>
                       Not a member?
-                      <a href>Register</a>
+                      <a >Register</a>
                     </p>
                   </form>
                   <!-- Form -->
@@ -112,8 +112,8 @@
         </ul>
       </div>
     </nav>
-    <!-- <component :is="selected" :isLogged="isLogged"></component> -->
-    <router-view :isLogged="isLogged" :key="isLogged"></router-view>
+    <component :is="selected" :isLogged="isLogged"></component>
+    <!-- <router-view :isLogged="isLogged" :key="isLogged"></router-view> -->
     <div
       v-if="!isLogged"
       id="banner_home"
@@ -241,46 +241,44 @@
 import NaviItem from "./components/NavItem";
 import BotaoSignUp from "./components/BotaoSignUp";
 
+import Inicio from "./components/Inicio.vue";
+import Sobre from "./components/Sobre.vue";
+import MinhaConta from "./components/MinhaConta.vue";
+import Servico from "./components/Servicos.vue";
+import Produto from "./components/Produtos.vue";
+import Contato from "./components/Contato.vue";
 export default {
   name: "app",
   components: {
     NaviItem,
-    BotaoSignUp
+    BotaoSignUp,
+    Inicio,
+    Sobre,
+    MinhaConta,
+    Servico,
+    Produto,
+    Contato
   },
   data: () => {
     return {
-      tabs: [
-        { name: "Inicio", content: "/" },
-        { name: "Sobre", content: "/sobre" },
-        { name: "Produtos", content: "/produtos" },
-        { name: "Serviços", content: "/servicos" },
-        { name: "Contato", content: "/contato"}
-      ],
-      isLogged: true,
+      tabs: ["Inicio", "Sobre", "Servico", "Produto", "Contato"],
+      selected: "Inicio",
+      isLogged: false,
       email: "",
       password: "",
       user: "",
       users: []
     };
   },
-  computed: {
-    
-  },
+  computed: {},
   methods: {
-    logged() {
-      // alert(this.$router.currentRoute.name)
-      return this.isLogged
+    login(){
+      this.isLogged = true;
     },
-    loginIn() {
-      
-    },
-    logout() {
-      
-    },
-    getRoute() {
-      return this.$router.currentRoute.name;
+    logout(){
+      this.isLogged = false;
     }
-  },
+  }
 };
 </script>
 

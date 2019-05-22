@@ -1,8 +1,7 @@
 <template>
-  <li :class="['nav-item',{active: getRoute() == getName()}]">
-    <a :href="getContent()" :class="['nav-link',{disabled: getRoute()== getName()}]">
-      <!-- <router-link :to="getContent()">{{tab.name}}</router-link> -->
-      {{tab.name}}
+  <li :class="['nav-item',{active: selected == tab}]">
+    <a :class="['nav-link',{disabled: selected == tab}]" @click="selected = tab">
+      {{tab}}
     </a>
   </li>
 </template>
@@ -11,19 +10,8 @@
 export default {
   name: "NaviItem",
   props: {
-    isLogged: Array,
-    tab: Object
-  },
-  methods: {
-    getName() {
-      return this.tab.name;
-    },
-    getContent() {
-      return this.tab.content;
-    },
-    getRoute() {
-      return this.$router.currentRoute.name;
-    }
+    isLogged: Boolean,
+    tab: String
   }
 };
 </script>

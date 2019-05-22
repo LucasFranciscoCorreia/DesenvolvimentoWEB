@@ -2,48 +2,24 @@
 <template>
   <main>
     <div class="row py-4" style="background-color:#63CF67">
-      <div class="container col-lg-4 ml-auto">
-        <img src="assets/tools.png" alt="tools" width="100px">
+      <div class="col-lg-4 col-md-4 col-sm-4 ml-auto">
+        <img class="image" src="assets/tools.png" alt="tools">
       </div>
-      <p class="gray-text" style="font-size: 50px;font-weight: bold;font-family: Lato">
+      <p
+        class="exp col-lg-4 col-md-4 col-sm-4 gray-text"
+        style="font-size: 50px;font-weight: bold;font-family: Lato"
+      >
         <b>Contrate um serviço</b>
       </p>
-      <div class="container col-lg-4 ml-auto">
-        <img src="assets/naturehands.png" alt="naturehands" width="100px">
+      <div class="col-lg-4 col-md-4 col-sm-4 ml-auto">
+        <img class="image" src="assets/naturehands.png" alt="naturehands" width="100px">
       </div>
     </div>
-    <div class="jumbotron">
+    <div class="py-4">
       <div class="row">
-        <div class="card mx-auto text-center" style="width: 18rem;">
-          <img class="mx-auto d-block" src="./assets/organic.png" alt="logo">
-          <div class="card-body">
-            <h5 class="card-title">Abastecimento</h5>
-            <p
-              class="card-text"
-            >Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <a href="#" class="btn btn-md btn-dark">Contratar</a>
-          </div>
-        </div>
-        <div class="card mx-auto text-center" style="width: 18rem;">
-          <img class="card-img-top" src="./assets/maintenance.png" alt="logo">
-          <div class="card-body">
-            <h5 class="card-title">Manuntenção</h5>
-            <p
-              class="card-text"
-            >Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <a href="#" class="btn btn-md btn-dark">Contratar</a>
-          </div>
-        </div>
-        <div class="card mx-auto text-center" style="width: 18rem;">
-          <img class="card-img-top" src="./assets/trash.png" alt="logo">
-          <div class="card-body">
-            <h5 class="card-title">Coleta</h5>
-            <p
-              class="card-text"
-            >Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <a href="#" class="btn btn-md btn-dark">Contratar</a>
-          </div>
-        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1"></div>
+        <Servico v-for="item in items" :key="item" :title="item.title" :text="item.text" :src="item.src" />
+        <div class="col-lg-1 col-md-1 col-sm-1"></div>
       </div>
     </div>
 
@@ -63,7 +39,46 @@
   </main>
 </template>
 <script>
+import Servico from "./Servico.vue";
 export default {
-  name: "ServicoLogado"
-}
+  name: "ServicoLogado",
+  components: {
+    Servico
+  },
+  data: () => {
+    return {
+      items: [
+      {
+        title: "Abastecimento",
+        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        src: "./assets/organic.png"
+      },
+      {
+        title: "Manuntenção",
+        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        src: "./assets/maintenance.png"
+      },
+      {
+        title: "Coleta",
+        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        src: "./assets/truck.png"
+      }]
+    }
+  }
+};
 </script>
+<style scoped>
+.image {
+  width: 100%;
+  max-width: 7em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.exp {
+  text-align: center;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+</style>
