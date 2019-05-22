@@ -232,9 +232,9 @@ export default {
         { name: "Inicio", content: "/" },
         { name: "Sobre", content: "/sobre" },
         { name: "Produtos", content: "/produtos" },
-        { name: "Serviço", content: "/servico" }
+        { name: "Serviços", content: "/servicos" }
       ],
-      isLogged: false,
+      isLogged: true,
       email: "",
       password: "",
       user: "",

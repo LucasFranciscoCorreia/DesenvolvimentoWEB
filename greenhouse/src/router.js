@@ -6,7 +6,7 @@ import Sobre from "./components/Sobre.vue"
 import MinhaConta from "./components/MinhaConta.vue"
 
 import Servico from "./components/Servicos.vue"
-// import ProdutoNLogado from "./components/ProdutoNLogado.vue"
+import Produto from "./components/Produtos.vue"
 
 Vue.use(Router)
 export default new Router({
@@ -21,6 +21,11 @@ export default new Router({
             path: "/servicos",
             name: "Servico",
             component: Servico
+        },
+        {
+            path: "/produtos",
+            name: "Produtos",
+            component: Produto
         },
         {
             path: "/user",
