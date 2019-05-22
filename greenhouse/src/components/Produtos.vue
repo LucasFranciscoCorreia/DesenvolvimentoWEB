@@ -15,7 +15,7 @@ export default {
     ProdutoNLogado
   },
   props: {
-    
+    isLogged: Boolean
   }
 };
 </script>

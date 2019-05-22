@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row py-5">
             <div class="col-lg-3 col-md-3 col-sm-3"></div>
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <h1 style="text-align: center">
@@ -140,7 +140,7 @@
                                 <p class="card-text">Some quick example text to build on the card title and make up the
                                     bulk of the
                                     card's content.</p>
-                                <a class="btn btn-primary btn-md btn-rounded">Button</a>
+                                
                             </div>
                         </div>
                     </div>

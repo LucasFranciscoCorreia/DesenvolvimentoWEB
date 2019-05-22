@@ -5,8 +5,8 @@
     <nav class="navbar navbar-expand-lg navbar-light mr-auto">
       <div class="collapse navbar-collapse ml-auto" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-          <div  v-for="tab in tabs" :key="tab">
-            <NaviItem :tab="tab" :isLogged="isLogged" />
+          <div v-for="tab in tabs" :key="tab">
+            <NaviItem :tab="tab" :isLogged="isLogged"/>
           </div>
           <li v-if="!isLogged" class="nav-item dropdown">
             <a
@@ -74,7 +74,9 @@
                       class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0"
                       type="submit"
                       style="border-radius: 2rem"
-                    ><a  v-on:click="loginIn()" href="/user">Sign in</a></button>
+                    >
+                      <a v-on:click="loginIn()" href="/user">Sign in</a>
+                    </button>
 
                     <!-- Register -->
                     <p>
@@ -88,11 +90,29 @@
               <!-- Material form login -->
             </div>
           </li>
+          <li v-else class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              id="navbarDropdownMenuLink-4"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i class="fas fa-user"></i> Maria M
+            </a>
+            <div
+              class="dropdown-menu dropdown-menu-right dropdown-info"
+              aria-labelledby="navbarDropdownMenuLink-4"
+            >
+              <a class="dropdown-item" href="/user">Minha conta</a>
+              <a class="dropdown-item" href="/" v-on:click="logout()">Sair</a>
+            </div>
+          </li>
         </ul>
       </div>
     </nav>
     <!-- <component :is="selected" :isLogged="isLogged"></component> -->
-    <router-view></router-view>
+    <router-view :isLogged="isLogged"></router-view>
     <div
       v-if="!isLogged"
       id="banner_home"
@@ -217,8 +237,8 @@
 </template>
 
 <script>
-import NaviItem from "./components/NavItem"
-import BotaoSignUp from "./components/BotaoSignUp"
+import NaviItem from "./components/NavItem";
+import BotaoSignUp from "./components/BotaoSignUp";
 
 export default {
   name: "app",
@@ -234,7 +254,7 @@ export default {
         { name: "Produtos", content: "/produtos" },
         { name: "Serviços", content: "/servicos" }
       ],
-      isLogged: true,
+      isLogged: false,
       email: "",
       password: "",
       user: "",
@@ -244,7 +264,6 @@ export default {
   methods: {
     loginIn() {
       this.isLogged = true;
-
     },
     logout() {
       this.isLogged = false;
