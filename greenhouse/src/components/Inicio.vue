@@ -1,7 +1,5 @@
 <template>
-
   <main>
-                  
     <div id="banner_home" style="background-color: #0EBE57; color: white;">
       <div class="row">
         <div class="col-sm-6 col-md-6 col-lg-6" style="margin:auto;">
@@ -24,8 +22,12 @@
               </p>
             </div>
             <div class="row">
-
-    <button type="button" class="btn btn-dark"  style="margin:auto;" @click="$modal.show('demo-login')">Sign up</button>
+              <button
+                type="button"
+                class="btn btn-dark"
+                style="margin:auto;"
+                @click="$modal.show('demo-login')"
+              >Sign up</button>
             </div>
           </div>
         </div>
@@ -93,23 +95,20 @@
         </div>
       </div>
     </div>
-
-    
   </main>
 </template>
 
 <script>
-  import SignUp from './SignUp.vue'
+
 
 export default {
   name: "Inicio",
-  components:{
-    SignUp,
-  },
-  props:{
-    isLogged: Boolean
-  },
+  components: {
 
+  },
+  props: {
+    isLogged: Boolean
+  }
 };
 </script>
 

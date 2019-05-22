@@ -5,59 +5,61 @@
     <nav class="navbar navbar-expand-lg navbar-light mr-auto">
       <div class="collapse navbar-collapse ml-auto" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-          <div  v-for="tab in tabs">
+          <div v-for="tab in tabs" :key="tab">
             <div v-if="isLogged && (tab.name == 'Serviço' || tab.name=='Produtos')">
-              <li 
-              v-if="tab.name =='Serviço'"
-              :class="['nav-item',{active: getRoute() == 'ServicoLogado'}]"
+              <li
+                v-if="tab.name =='Serviço'"
+                :class="['nav-item',{active: getRoute() == 'ServicoLogado'}]"
               >
+                <a
+                  :class="['nav-link',{disabled: getRoute()=='ServicoLogado'}]"
+                  :href="'/servicosUser'"
+                >Serviços</a>
+              </li>
 
-              <a :class="['nav-link',{disabled: getRoute()=='ServicoLogado'}]":href="'/servicosUser'">Serviços</a>
-            </li>
+              <li
+                v-else-if="tab.name =='Produtos'"
+                :class="['nav-item',{active: getRoute() == 'ProdutoLogado'}]"
+              >
+                <a
+                  :class="['nav-link',{disabled: getRoute()=='ProdutoLogado'}]"
+                  :href="'/produtosUser'"
+                >Produtos</a>
+              </li>
+            </div>
+            <div v-else-if="!isLogged && (tab.name == 'Serviço' || tab.name=='Produtos')">
+              <li
+                v-if="tab.name=='Serviço'"
+                :key="ServicoNLogado"
+                :class="['nav-item',{active: getRoute() == 'ServicoNLogado'}]"
+              >
+                <a
+                  :class="['nav-link',{disabled: getRoute()=='ServicoNLogado'}]"
+                  :href="'/servicos'"
+                >Serviços</a>
+              </li>
+              <li
+                v-if="tab.name=='Produtos'"
+                :key="ProdutoNLogado"
+                :class="['nav-item',{active: getRoute() == 'ProdutoNLogado'}]"
+              >
+                <a
+                  :class="['nav-link',{disabled: getRoute()=='ProdutoNLogado'}]"
+                  :href="'/produtos'"
+                >Produtos</a>
+              </li>
+            </div>
+            <div v-else>
+              <li :key="tab" :class="['nav-item',{active: getRoute() == tab.name}]">
+                <a
+                  :class="['nav-link',{disabled: getRoute() == tab.name}]"
+                  :href="tab.content"
+                >{{tab.name}}</a>
+              </li>
+            </div>
+          </div>
 
-            <li 
-            v-else-if="tab.name =='Produtos'"
-            :class="['nav-item',{active: getRoute() == 'ProdutoLogado'}]"
-            >
-
-            <a :class="['nav-link',{disabled: getRoute()=='ProdutoLogado'}]" :href="'/produtosUser'">Produtos</a>
-          </li>
-        </div>
-        <div v-else-if="!isLogged && (tab.name == 'Serviço' || tab.name=='Produtos')">
-          <li 
-          v-if="tab.name=='Serviço'"
-          :key='ServicoNLogado'
-
-          :class="['nav-item',{active: getRoute() == 'ServicoNLogado'}]"
-          >
-          <a :class="['nav-link',{disabled: getRoute()=='ServicoNLogado'}]":href="'/servicos'">Serviços</a>
-        </li>
-        <li 
-        v-if="tab.name=='Produtos'"
-        :key='ProdutoNLogado'
-        
-        :class="['nav-item',{active: getRoute() == 'ProdutoNLogado'}]"
-        >
-        <a :class="['nav-link',{disabled: getRoute()=='ProdutoNLogado'}]":href="'/produtos'">Produtos</a>
-      </li>
-
-    </div>
-    <div v-else>
-      <li 
-      :key="tab"
-      :class="['nav-item',{active: getRoute() == tab.name}]"
-
-      >
-      <a :class="['nav-link',{disabled: getRoute() == tab.name}]" :href="tab.content">{{tab.name}}</a>
-
-    </li>
-  </div>
-
-
-
-</div>
-
-<li v-if="isLogged" class="nav-item dropdown">
+          <li v-if="isLogged" class="nav-item dropdown">
             <a
               class="nav-link dropdown-togogle"
               id="navbarDropdownMenuLink-4"
@@ -72,7 +74,7 @@
               aria-labelledby="navbarDropdownMenuLink-4"
             >
               <a class="dropdown-item" href="#" v-on:click="selected='MinhaConta'">Minha conta</a>
-              <a class="dropdown-item" href="#" v-on:click='logout()'>Sair</a>
+              <a class="dropdown-item" href="#" v-on:click="logout()">Sair</a>
             </div>
           </li>
           <li v-else class="nav-item dropdown">
@@ -139,7 +141,9 @@
                     <!-- Sign in button -->
                     <button
                       class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0"
-                      type="submit" style="border-radius: 2rem" v-on:click="loginIn()"
+                      type="submit"
+                      style="border-radius: 2rem"
+                      v-on:click="loginIn()"
                     >Sign in</button>
 
                     <!-- Register -->
@@ -158,8 +162,13 @@
       </div>
     </nav>
     <!-- <component :is="selected" :isLogged="isLogged"></component> -->
-     <router-view></router-view>
-     <div v-if="!isLogged" id="banner_home" class="py-4" style="background-color: #0EBE57;color: white;">
+    <router-view></router-view>
+    <div
+      v-if="!isLogged"
+      id="banner_home"
+      class="py-4"
+      style="background-color: #0EBE57;color: white;"
+    >
       <div class="container">
         <div class="row" style="margin:auto;">
           <div class="col-sm-6 col-md-6 col-lg-6">
@@ -167,7 +176,7 @@
             <h2>Comece agora mesmo!</h2>
           </div>
           <div class="col-sm-6 col-md-6 col-lg-6" style="margin:auto;">
-          <BotaoSignUp/>
+            <BotaoSignUp/>
           </div>
         </div>
       </div>
@@ -240,7 +249,11 @@
                 aria-describedby="basic-addon2"
               >
               <div class="input-group-append">
-                <button class="btn btn-sm btn-outline-white my-0" type="button" style="border-radius: 0.5rem">Subscribe</button>
+                <button
+                  class="btn btn-sm btn-outline-white my-0"
+                  type="button"
+                  style="border-radius: 0.5rem"
+                >Subscribe</button>
               </div>
             </form>
             <br>
@@ -274,7 +287,7 @@
 </template>
 
 <script>
-  import BotaoSignUp from './components/BotaoSignUp.vue'
+import BotaoSignUp from "./components/BotaoSignUp.vue";
 // import Inicio from "./components/Inicio.vue";
 // import Sobre from "./components/Sobre.vue";
 // import MinhaConta from "./components/MinhaConta.vue"
@@ -287,8 +300,6 @@
 //   }
 // }
 export default {
-  
-
   name: "app",
   components: {
     // Inicio,
@@ -298,8 +309,12 @@ export default {
   },
   data: () => {
     return {
-      tabs: [{name:"Inicio", content:"/"}, {name:"Sobre", content:"/sobre"},{name:"Produtos", content:"/produtos"},
-      {name:"Serviço", content:"/servico"}],
+      tabs: [
+        { name: "Inicio", content: "/" },
+        { name: "Sobre", content: "/sobre" },
+        { name: "Produtos", content: "/produtos" },
+        { name: "Serviço", content: "/servico" }
+      ],
       isLogged: false,
       email: "",
       password: "",
@@ -308,16 +323,16 @@ export default {
     };
   },
   methods: {
-    loginIn(){
-      this.isLogged=true
-      this.selected="/user/123"
+    loginIn() {
+      this.isLogged = true;
+      this.selected = "/user/123";
     },
-    logout(){
-      this.isLogged=false
-      this.selected="/"
+    logout() {
+      this.isLogged = false;
+      this.selected = "/";
     },
-    getRoute(){
-      return this.$router.currentRoute.name
+    getRoute() {
+      return this.$router.currentRoute.name;
     }
   }
 };
@@ -325,7 +340,6 @@ export default {
 
 <style scoped>
 #app {
-
 }
 </style>
 
