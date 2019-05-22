@@ -6,6 +6,8 @@ import VModal from 'vue-js-modal'
 
 Vue.use(VModal)
 
+export var loggedIn = {is: false};
+
 new Vue(
   Vue.util.extend({router}, App)
   // {

@@ -190,3 +190,12 @@
         
     </main>
 </template>
+<script>
+export default {
+    name: "ProdutoNLogado"    
+}
+</script>
+
+<style>
+
+</style>

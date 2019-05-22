@@ -5,10 +5,29 @@
     <nav class="navbar navbar-expand-lg navbar-light mr-auto">
       <div class="collapse navbar-collapse ml-auto" id="navbarNav">
         <ul class="navbar-nav ml-auto">
+          <button v-on:click="logged()">isLogged?</button>
           <div v-for="tab in tabs" :key="tab">
             <NaviItem :tab="tab" :isLogged="isLogged"/>
           </div>
-          <li v-if="!isLogged" class="nav-item dropdown">
+          <li v-if="isLogged" :key="isLogged" class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              id="navbarDropdownMenuLink-4"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i class="fas fa-user"></i> Maria M
+            </a>
+            <div
+              class="dropdown-menu dropdown-menu-right dropdown-info"
+              aria-labelledby="navbarDropdownMenuLink-4"
+            >
+              <a class="dropdown-item" href="/user">Minha conta</a>
+              <a class="dropdown-item" href="/" @click="logout()">Sair</a>
+            </div>
+          </li>
+          <li v-else :key="isLogged" class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
               id="navbarDropdownMenuLink-4"
@@ -90,29 +109,11 @@
               <!-- Material form login -->
             </div>
           </li>
-          <li v-else class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              id="navbarDropdownMenuLink-4"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <i class="fas fa-user"></i> Maria M
-            </a>
-            <div
-              class="dropdown-menu dropdown-menu-right dropdown-info"
-              aria-labelledby="navbarDropdownMenuLink-4"
-            >
-              <a class="dropdown-item" href="/user">Minha conta</a>
-              <a class="dropdown-item" href="/" v-on:click="logout()">Sair</a>
-            </div>
-          </li>
         </ul>
       </div>
     </nav>
     <!-- <component :is="selected" :isLogged="isLogged"></component> -->
-    <router-view :isLogged="isLogged"></router-view>
+    <router-view :isLogged="isLogged" :key="isLogged"></router-view>
     <div
       v-if="!isLogged"
       id="banner_home"
@@ -239,6 +240,7 @@
 <script>
 import NaviItem from "./components/NavItem";
 import BotaoSignUp from "./components/BotaoSignUp";
+import { loggedIn } from "./main";
 
 export default {
   name: "app",
@@ -254,7 +256,7 @@ export default {
         { name: "Produtos", content: "/produtos" },
         { name: "Serviços", content: "/servicos" }
       ],
-      isLogged: false,
+      isLogged: loggedIn.is,
       email: "",
       password: "",
       user: "",
@@ -262,11 +264,18 @@ export default {
     };
   },
   methods: {
+    logged() {
+      alert(loggedIn.is)
+      loggedIn.is = true
+      alert(loggedIn.is)
+      alert(this.isLogged);
+      return this.isLogged;
+    },
     loginIn() {
-      this.isLogged = true;
+      loggedIn.is = true;
     },
     logout() {
-      this.isLogged = false;
+      loggedIn.is = false;
     },
     getRoute() {
       return this.$router.currentRoute.name;

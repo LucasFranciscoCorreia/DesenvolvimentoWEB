@@ -10,7 +10,7 @@
 export default {
   name: "NaviItem",
   props: {
-    isLogged: Boolean,
+    isLogged: Object,
     tab: Object
   },
   methods: {
