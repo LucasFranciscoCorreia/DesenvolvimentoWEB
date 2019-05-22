@@ -1,23 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <link rel="stylesheet" href="style/all.css">
-    <link rel="stylesheet" href="style/compiled.min.css">
-    <link rel="stylesheet" href="style/bootstrap.css">
-    <link rel="stylesheet" href="style/mdb.min.css">
-
-    <script type="text/javascript" src="scripts/all.js"></script>
-    <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
-    <script type="text/javascript" src="scripts/compiled.min.js"></script>
-    <script type="text/javascript" src="scripts/mdb.min.js"></script>
-    <title>GreenHouse</title>
-</head>
-
+ <template>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light mr-auto">
@@ -33,7 +14,7 @@
                         <a class="nav-link disabled" href="#">Inicio <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sobre</a>
+                        <a class="nav-link" href="Sobre.html">Sobre</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Produtos</a>
@@ -47,11 +28,61 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-user"></i> Maria M </a>
+                            Sign in </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-info"
                             aria-labelledby="navbarDropdownMenuLink-4">
-                            <a class="dropdown-item" href="#">Minha conta</a>
-                            <a class="dropdown-item" href="#">Sair</a>
+                            <!-- Material form login -->
+                            <div class="card">
+
+                                <h5 class="card-header info-color white-text text-center py-4">
+                                    <strong>Sign in</strong>
+                                </h5>
+
+                                <!--Card content-->
+                                <div class="card-body px-lg-5 pt-0">
+
+                                    <!-- Form -->
+                                    <form class="text-center" style="color: #757575;">
+                                        <br class="py-2">
+                                        <input type="email" id="defaultLoginFormEmail" class="form-control mb-4"
+                                            placeholder="E-mail">
+
+                                        <!-- Password -->
+                                        <input type="password" id="defaultLoginFormPassword" class="form-control mb-4"
+                                            placeholder="Password">
+
+                                        <div class="d-flex justify-content-around">
+                                            <div>
+                                                <!-- Remember me -->
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input"
+                                                        id="materialLoginFormRemember">
+                                                    <label class="form-check-label"
+                                                        for="materialLoginFormRemember">Remember me</label>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <!-- Forgot password -->
+                                                <a href="">Forgot password?</a>
+                                            </div>
+                                        </div>
+
+                                        <!-- Sign in button -->
+                                        <button
+                                            class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0"
+                                            type="submit">Sign in</button>
+
+                                        <!-- Register -->
+                                        <p>Not a member?
+                                            <a href="">Register</a>
+                                        </p>
+                                    </form>
+                                    <!-- Form -->
+
+                                </div>
+
+                            </div>
+                            <!-- Material form login -->
                         </div>
                     </li>
                 </ul>
@@ -155,7 +186,14 @@
         </div>
     </footer>
 </body>
+</template>
 
-<!-- Footer -->
+<script>
+export default{
+   props: ['titulo']
+}
+</script>
 
-</html>
+<style scoped>
+
+</style>

@@ -1,23 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <link rel="stylesheet" href="style/all.css">
-    <link rel="stylesheet" href="style/compiled.min.css">
-    <link rel="stylesheet" href="style/bootstrap.css">
-    <link rel="stylesheet" href="style/mdb.min.css">
-
-    <script type="text/javascript" src="scripts/all.js"></script>
-    <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
-    <script type="text/javascript" src="scripts/compiled.min.js"></script>
-    <script type="text/javascript" src="scripts/mdb.min.js"></script>
-    <title>GreenHouse</title>
-</head>
-
+ <template>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light mr-auto">
@@ -155,7 +136,14 @@
         </div>
     </footer>
 </body>
+</template>
 
-<!-- Footer -->
+<script>
+export default{
+   props: ['titulo']
+}
+</script>
 
-</html>
+<style scoped>
+
+</style>
