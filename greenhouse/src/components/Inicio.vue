@@ -99,12 +99,10 @@
 </template>
 
 <script>
-  import SignUp from './SignUp.vue'
 
 export default {
   name: "Inicio",
   components:{
-    SignUp,
   },
   props:{
     isLogged: Boolean

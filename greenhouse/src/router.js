@@ -56,4 +56,5 @@ export default new Router({
         component: MinhaConta
     }
     ]
+    
 });
