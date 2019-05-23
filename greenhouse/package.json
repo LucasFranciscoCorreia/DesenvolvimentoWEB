@@ -5,11 +5,11 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
-    "tar": ">=4.4.2",
     "core-js": "^2.6.5",
     "hammerjs": "^2.0.8",
     "jquery": "^3.4.1",
@@ -17,6 +17,7 @@
     "pickerjs": "^1.2.1",
     "popper.js": "^1.15.0",
     "scripts": "^0.1.0",
+    "tar": ">=4.4.2",
     "vue": "^2.6.10",
     "vue-global-var": "^1.0.0",
     "vue-js-modal": "^1.3.31",
@@ -31,6 +32,7 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "node-sass": "^4.12.0",
+    "push-dir": "^0.4.1",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.5.21",
     "webpack": "^4.32.0"
