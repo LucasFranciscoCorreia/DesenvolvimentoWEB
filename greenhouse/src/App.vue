@@ -247,6 +247,7 @@ import MinhaConta from "./components/MinhaConta.vue";
 import Servico from "./components/Servicos.vue";
 import Produto from "./components/Produtos.vue";
 import Contato from "./components/Contato.vue";
+
 export default {
   name: "app",
   components: {
@@ -283,7 +284,6 @@ export default {
 </script>
 
 <style scoped>
-#app {
-}
+
 </style>
 

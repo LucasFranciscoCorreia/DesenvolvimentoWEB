@@ -1,60 +1,82 @@
 <template>
-<modal name="demo-login" transition="pop-out" :width="modalWidth" :height="400">
-  <div class="box">
-    <div class="box-part" id="bp-left">
-      <div class="partition" id="partition-register">
-        <div class="partition-title">CRIAR CONTA</div>
-        <div class="partition-form">
-          <form autocomplete="false">
+  <modal name="demo-login" transition="pop-out" :width="modalWidth" :height="400">
+    <div class="box">
+      <div class="box-part" id="bp-left">
+        <div class="partition" id="partition-register">
+          <div class="partition-title">CRIAR CONTA</div>
+          <div class="partition-form">
+            <form autocomplete="false" method="post">
+              <div class="autocomplete-fix">
+                <input type="password">
+              </div>
 
-            <div class="autocomplete-fix">
-              <input type="password">
+              <input v-model="email" id="n-email" type="text" placeholder="Email">
+              <input v-model="username" id="n-username" type="text" placeholder="Usuário">
+              <input v-model="password" id="n-password2" type="password" placeholder="Senha">
+            </form>
+
+            <div style="margin-top: 42px"></div>
+
+            <div class="button-set" style="text-align: center;">
+              <button type="button" class="btn btn-dark" v-on:click="signup()">Registrar</button>
             </div>
 
-            <input id="n-email" type="text" placeholder="Email">
-            <input id="n-username" type="text" placeholder="Usuário">
-            <input id="n-password2" type="password" placeholder="Senha">
-          </form>
-
-          <div style="margin-top: 42px">
+            <button class="large-btn github-btn">
+              conectar com
+              <span>google</span>
+            </button>
+            <button class="large-btn facebook-btn">
+              conectar com
+              <span>facebook</span>
+            </button>
           </div>
-
-          <div class="button-set" style="text-align: center;">
-            <button type="button" class="btn btn-dark" style="">Registrar</button>
-          </div>
-
-          <button class="large-btn github-btn">conectar com <span>google</span></button>
-          <button class="large-btn facebook-btn">conectar com <span>facebook</span></button>
         </div>
       </div>
-    </div>
-    <div class="box-part" id="bp-right">
-      <div class="box-messages">
+      <div class="box-part" id="bp-right">
+        <div class="box-messages"></div>
       </div>
     </div>
-  </div>
-</modal>
+  </modal>
 </template>
+
 <script>
-const MODAL_WIDTH = 328
+const MODAL_WIDTH = 328;
+import http from '../http-common'
 export default {
-  name: 'SignUp',
-  data () {
+  name: "SignUp",
+  data() {
     return {
-      modalWidth: MODAL_WIDTH
-    }
+      modalWidth: MODAL_WIDTH,
+      email: "",
+      password: "",
+      username: ""
+    };
   },
-  created () {
-    this.modalWidth = window.innerWidth < MODAL_WIDTH
-      ? MODAL_WIDTH / 2
-      : MODAL_WIDTH
+  created() {
+    this.modalWidth =
+      window.innerWidth < MODAL_WIDTH ? MODAL_WIDTH / 2 : MODAL_WIDTH;
+  },
+  methods: {
+    signup() {
+      // http.post('/user',{
+      //   email: '123',
+      //   password: '123',
+      //   username: '123'
+      // }).then(response => {
+      //   console.log(response)
+      // })
+      http.get('/users').then(response => {
+        console.log(response)
+      })
+    }
   }
-}
+};
 </script>
+
 <style lang="scss">
 $background_color: #404142;
 $github_color: #ea4335;
-$facebook_color: #3880FF;
+$facebook_color: #3880ff;
 .box {
   background: white;
   overflow: hidden;
@@ -94,7 +116,7 @@ $facebook_color: #3880FF;
     width: 100%;
     font-size: 11px;
     color: white;
-    background: #F38181;
+    background: #f38181;
   }
   .partition {
     width: 100%;
@@ -113,8 +135,8 @@ $facebook_color: #3880FF;
       box-sizing: border-box;
     }
   }
-  input[type=password],
-  input[type=text] {
+  input[type="password"],
+  input[type="text"] {
     display: block;
     box-sizing: border-box;
     margin-bottom: 4px;
@@ -122,7 +144,7 @@ $facebook_color: #3880FF;
     font-size: 12px;
     line-height: 2;
     border: 0;
-    border-bottom: 1px solid #DDDEDF;
+    border-bottom: 1px solid #dddedf;
     padding: 4px 8px;
     font-family: inherit;
     transition: 0.5s all;
@@ -140,13 +162,13 @@ $facebook_color: #3880FF;
     margin-top: 8px;
     color: #8b8c8d;
     cursor: pointer;
-    border: 1px solid #DDDEDF;
+    border: 1px solid #dddedf;
     text-transform: uppercase;
     transition: 0.1s all;
     font-size: 10px;
     outline: none;
     &:hover {
-      border-color: mix(#DDDEDF, black, 90%);
+      border-color: mix(#dddedf, black, 90%);
       color: mix(#8b8c8d, black, 80%);
     }
   }
