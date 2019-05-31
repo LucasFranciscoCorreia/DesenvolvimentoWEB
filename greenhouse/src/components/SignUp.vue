@@ -41,7 +41,7 @@
 
 <script>
 const MODAL_WIDTH = 328;
-import http from '../http-common'
+import http from "../http-common";
 export default {
   name: "SignUp",
   data() {
@@ -58,16 +58,19 @@ export default {
   },
   methods: {
     signup() {
-      // http.post('/user',{
-      //   email: '123',
-      //   password: '123',
-      //   username: '123'
-      // }).then(response => {
-      //   console.log(response)
-      // })
-      http.get('/users').then(response => {
-        console.log(response)
-      })
+      if (this.email && this.password) {
+        http
+          .post("/user", {
+            tpusuario: "S",
+            email: this.email,
+            password: this.password
+          })
+          .then(response => {
+            alert("Usuario cadasttrado com sucesso")
+          });
+      }else{
+        alert("Preencha os campos")
+      }
     }
   }
 };
