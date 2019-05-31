@@ -16,14 +16,11 @@ public class Usuario{
     @Column(name = "tpusuario")
     private String tpusuario;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "password")
     private String password;
-
-    @Column(name = "username")
-    private String username;
 
     public Usuario(){
 
@@ -61,20 +58,11 @@ public class Usuario{
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public boolean Equals(Object o){
-        if(o != null){
-            if(o instanceof Usuario){
-                if(((Usuario)o).email== this.email || ((Usuario)o).idusuario == this.idusuario){
-                    return true;
-                }
+    public boolean equals(Object o){
+        if(o instanceof Usuario){
+            Usuario u = (Usuario)o;
+            if(u.getEmail() == this.email || u.getIdusuario() == this.idusuario){
+                return true;
             }
         }
         return false;

@@ -21,10 +21,6 @@ public class UsuarioService{
     }
 
     public void insert(Usuario user) throws Exception{
-        if (this.repositorio.findById(user.getIdusuario()) == null) {
-            repositorio.save(user);
-        }else {
-            throw new Exception("Usuario ja cadastrado");
-        }
+        repositorio.save(user);
     }
 }

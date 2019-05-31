@@ -26,11 +26,11 @@ public class UsuarioController{
 
     @PostMapping(value = "/user")
     public void addUser(@RequestBody Usuario user) throws Exception{
-        if (!this.users().contains(user)) {
+        List<Usuario> users = this.users();
+        if(!users.contains(user))
             this.service.insert(user);
-        }else{
+        else
             throw new Exception("Usuario ja cadastrado");
-        }
     }
 
 }
