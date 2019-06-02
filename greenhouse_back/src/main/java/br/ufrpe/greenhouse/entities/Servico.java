@@ -18,6 +18,39 @@ public class Servico {
   @Column(name = "tipo")
   private int tipo;
 
+  @Column(name = "name")
+  private String name;
+
+  @Column(name = "srcPhoto")
+  private String srcPhoto;
+
+  @Column(name = "description")
+  private String description;
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getSrcPhoto() {
+    return srcPhoto;
+  }
+
+  public void setSrcPhoto(String srcPhoto) {
+    this.srcPhoto = srcPhoto;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
   public Servico(){
 
   }

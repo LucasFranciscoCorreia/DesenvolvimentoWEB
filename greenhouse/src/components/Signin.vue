@@ -79,12 +79,33 @@
 export default {
   name: "Signin",
   props: {
-    isLogged: Boolean
+    isLogged: Boolean,
+    email: "",
+    password:"",
   },
   methods: {
     loginIn() {
-      this.isLogged = true;
-      this.selected = "/user";
+      alert("entrou")
+      if (this.email && this.password) {
+        var url = "/users/filter?email=" + this.email
+        http
+          .get(url)
+          .then(response => {
+            if(response.password.equals(this.password)){
+              this.isLogged = true;
+            this.selected = "/user";
+            alert("Usuario conectado")
+            }else{
+              alert("Usuario ou senha incorreta")
+            }
+            
+            
+          });
+      }else{
+        alert("Preencha os campos")
+      }
+      
+      
     }
   }
 };

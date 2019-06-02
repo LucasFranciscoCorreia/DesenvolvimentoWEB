@@ -136,6 +136,7 @@
 </template>
 <script>
 import Carousel from "./Carousel.vue";
+import http from "../http-common";
 
 class CarouselItem {
   constructor(title, text, src) {
@@ -152,29 +153,24 @@ export default {
   },
   data: () => {
     return {
-      items: [
-        new CarouselItem(
-          "Card Title",
-          "Some text here",
-          "assets/Produtos/home_biogas_1.png"
-        ),
-        new CarouselItem(
-          "Card Title",
-          "Some text here",
-          "assets/Produtos/home_biogas_2.png"
-        ),
-        new CarouselItem(
-          "Card Title",
-          "Some text here",
-          "assets/Produtos/subpod.png"
-        ),
-        new CarouselItem(
-          "Card Title",
-          "Some text here",
-          "assets/Produtos/eletro.jpg"
-        )
-      ]
+      items: []
     };
+  },
+  mounted(){
+    http
+          .get("/produtos")
+          .then(response => {
+            for(var i = 0; i<response.data.length ; i++){
+             this.items.push(new CarouselItem(
+                response.data[i].name,
+                response.data[i].tipo,
+                response.data[i].srcPhoto
+                
+              )) 
+
+            }
+            
+          });
   }
 };
 </script>

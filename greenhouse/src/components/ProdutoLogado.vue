@@ -51,6 +51,7 @@
 
 <script>
 import Produto from "./Produto.vue"
+import http from "../http-common";
 
 class ProdutoItem{
     constructor(src, text){
@@ -66,15 +67,26 @@ export default {
     data:() => {
         return{
             items: [
-                new ProdutoItem("assets/decomposer.jpg", "Some text here"),
+                /*new ProdutoItem("assets/decomposer.jpg", "Some text here"),
                 new ProdutoItem("assets/compost.jpg", "Some text here"),
                 new ProdutoItem("assets/HomeBiogas.jpg", "Some text here"),
                 new ProdutoItem("assets/decomposer.jpg", "Some text here"),
                 new ProdutoItem("assets/compost.jpg", "Some text here"),
-                new ProdutoItem("assets/HomeBiogas.jpg", "Some text here")
+                new ProdutoItem("assets/HomeBiogas.jpg", "Some text here")*/
             ]
         }
-    }
+    },
+  mounted(){
+    http
+          .get("/produtos")
+          .then(response => {
+            for(var i = 0; i<response.data.length ; i++){
+             this.items.push(new ProdutoItem(response.data[i].srcPhoto, response.data[i].name)) 
+
+            }
+            
+          });
+  }
 }
 </script>
 

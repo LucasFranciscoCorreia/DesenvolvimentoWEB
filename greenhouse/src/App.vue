@@ -17,7 +17,7 @@
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <i class="fas fa-user"></i> Maria M
+              <i class="fas fa-user"></i> {{nomeUser}}
             </a>
             <div
               class="dropdown-menu dropdown-menu-right dropdown-info"
@@ -247,7 +247,7 @@ import MinhaConta from "./components/MinhaConta.vue";
 import Servico from "./components/Servicos.vue";
 import Produto from "./components/Produtos.vue";
 import Contato from "./components/Contato.vue";
-
+import http from "./http-common";
 export default {
   name: "app",
   components: {
@@ -268,12 +268,42 @@ export default {
       email: "",
       password: "",
       user: "",
-      users: []
+      users: [],
+      nomeUser:"Maria M"
     };
+  },
+  props:{
+    entra:Boolean
   },
   computed: {},
   methods: {
-    login(){
+    login(){/*alert(this.entra)
+      if (this.email && this.password) {
+        var url = "/users/filter?email=" + this.email
+         http.get(url)
+          .then(response  => {
+              
+            if(response.data[0].password==(this.password)){
+              this.entra= true
+            }else{
+              this.entra= false
+            }
+ 
+          });
+
+          alert(this.entra)
+          if(this.entra){
+              alert("Usuario conectado")
+              this.isLogged = true;
+              
+            }else{
+              alert("Usuario ou senha incorreta")
+            }
+      }else{
+        alert("Preencha os campos")
+      }
+      
+      */
       this.isLogged = true;
     },
     logout(){

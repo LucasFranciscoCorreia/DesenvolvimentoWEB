@@ -40,6 +40,16 @@
 </template>
 <script>
 import Servico from "./Servico.vue";
+import http from "../http-common";
+
+class Item {
+  constructor(title, text, src) {
+    this.title = title;
+    this.text = text;
+    this.src = src;
+  }
+}
+
 export default {
   name: "ServicoLogado",
   components: {
@@ -48,7 +58,7 @@ export default {
   data: () => {
     return {
       items: [
-      {
+      /*{
         title: "Abastecimento",
         text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         src: "./assets/organic.png"
@@ -62,8 +72,24 @@ export default {
         title: "Coleta",
         text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         src: "./assets/truck.png"
-      }]
+      }*/]
     }
+  },
+   mounted(){
+    http
+          .get("/servicos")
+          .then(response => {
+            for(var i = 0; i<response.data.length ; i++){
+             this.items.push({
+                title: response.data[i].name,
+                text: response.data[i].description,
+                src: response.data[i].srcPhoto}
+                
+              )
+
+            }
+            
+          });
   }
 };
 </script>

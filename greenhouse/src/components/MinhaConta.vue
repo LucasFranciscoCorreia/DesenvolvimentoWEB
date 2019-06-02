@@ -48,38 +48,10 @@
                 <strong>Histórico</strong>
               </h1>
             </div>
+            <Historico :historicoItems="items"/>
 
-            <div class="row">
-              <div class="col-sm-10 col-md-10 col-lg-10">
-                <div class="row">
-                  <h4>
-                    <strong>Serviço de Coleta de Lixo</strong>
-                  </h4>
-                </div>
-                <div class="row">
-                  <h4>Data: 11/02/2019</h4>
-                </div>
-              </div>
-              <div class="col-sm-2 col-md-2 col-lg-2">
-                <img src="assets/truck.png" height="58" style=" margin:auto;">
-              </div>
-            </div>
+            
 
-            <div class="row">
-              <div class="col-sm-10 col-md-10 col-lg-10">
-                <div class="row">
-                  <h4>
-                    <strong>Serviço de Coleta de Lixo</strong>
-                  </h4>
-                </div>
-                <div class="row">
-                  <h4>Data: 11/02/2019</h4>
-                </div>
-              </div>
-              <div class="col-sm-2 col-md-2 col-lg-2">
-                <img src="assets/truck.png" height="58" style=" margin:auto;">
-              </div>
-            </div>
           </div>
         </div>
 
@@ -132,10 +104,45 @@
 </template>
 
 <script>
+import Historico from "./Historico.vue"
+
+class HistoricolItem {
+  constructor(nome, data, srcPhoto) {
+    this.nome = nome;
+    this.data = data;
+    this.srcPhoto = srcPhoto;
+  }
+}
 export default {
   name: "MinhaConta",
+  components: {
+    Historico
+  },
   props: {
     isLogged: Boolean
+  },
+  data: () => {
+    return {
+      items: [new HistoricolItem("Serviço de Coleta de Lixo","11/02/2019","assets/truck.png"),
+      new HistoricolItem("Serviço de Coleta de Lixo","11/02/2019","assets/truck.png"),
+      new HistoricolItem("Serviço de Coleta de Lixo","11/02/2019","assets/truck.png"),
+      new HistoricolItem("Serviço de Coleta de Lixo","11/02/2019","assets/truck.png"),
+      new HistoricolItem("Serviço de Coleta de Lixo","11/02/2019","assets/truck.png")]
+    };
+  },
+   mounted(){
+     /* FAZER ISSO APÓS IMPLEMENTAR O HISTORICO NO BANCO
+    http
+          .get("/users")
+          .then(response => {
+            for(var i = 0; i<response.data.length ; i++){
+             this.items.push(new HistoricolItem(response.data[i].name,response.data[i].date,response.data[i].srcPhoto)
+                
+              )
+
+            }
+            
+          });*/
   }
 };
 </script>
