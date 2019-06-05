@@ -4,36 +4,79 @@
       <div class="box-part" id="bp-left">
         <div class="partition" id="partition-register">
           <div class="partition-title">CRIAR CONTA</div>
+
           <div class="partition-form">
             <form autocomplete="false" method="post">
               <div class="autocomplete-fix">
                 <input type="password">
               </div>
-              <div class="row">
-                <div class="custom-control custom-radio">
-                  <input type="radio" class="custom-control-input" id="defaultUnchecked" name="defaultExampleRadios">
-                  <label class="custom-control-label" for="defaultUnchecked">Default unchecked</label>
-                </div>
+
+              <div class="row form-check" style="margin: auto">
+                <input
+                  @click="selected = 'F'"
+                  type="radio"
+                  class="form-check-input col-sm-1 col-md-1 col-lg-1"
+                  id="materialChecked"
+                  name="tipoPessoa"
+                  checked
+                >
+                <label
+                  class="form-check-label col-sm-5 col-md-5 col-lg-5"
+                  for="materialChecked"
+                >Física</label>
+
+                <input
+                  @click="selected = 'J'"
+                  type="radio"
+                  class="form-check-input col-sm-1 col-md-1 col-lg-1"
+                  id="materialUnchecked"
+                  name="tipoPessoa"
+                >
+                <label
+                  class="form-check-label col-sm-5 col-md-5 col-lg-5"
+                  for="materialUnchecked"
+                >Jurídica</label>
               </div>
-              <div></div>
 
-              <div></div>
+              <div v-if="selected == 'F'" style class="py-1">
+                <input type="text" placeholder="Email" v-model="email" id="n-email">
+                <input type="password" placeholder="Password" v-model="password" id="n-password2">
+                <input type="text" placeholder="Nome" v-model="nome">
+                <input type="text" placeholder="CPF" v-model="CPF">
+                <div class="row" style="margin:auto;padding-left:20%">
+                  <input
+                    @click="sexo = 'M'"
+                    type="radio"
+                    class="form-check-input col-sm-1 col-md-1 col-lg-1"
+                    id="sexChecked"
+                    name="sexoPessoa"
+                    checked
+                  >
+                  <label class="form-check-label col-sm-5 col-md-5 col-lg-5" for="sexChecked">M</label>
+
+                  <input
+                    @click="sexo = 'F'"
+                    type="radio"
+                    class="form-check-input col-sm-1 col-md-1 col-lg-1"
+                    id="sexUnchecked"
+                    name="sexoPessoa"
+                  >
+                  <label class="form-check-label col-sm-5 col-md-5 col-lg-5" for="sexUnchecked">F</label>
+                </div>
+                <input v-model="data_nascimento" type="text" placeholder="04-06-2019">
+              </div>
+
+              <div v-else style class="py-1">
+                <input type="text" placeholder="Email" v-model="email" id="n-email">
+                <input type="password" placeholder="Password" v-model="password" id="n-password2">
+                <input type="text" placeholder="Nome" v-model="nome_fantasia">
+                <input type="text" placeholder="CNPJ" v-model="CNPJ">
+              </div>
             </form>
-
-            <div style="margin-top: 42px"></div>
 
             <div class="button-set" style="text-align: center;">
               <button type="button" class="btn btn-dark" v-on:click="signup()">Registrar</button>
             </div>
-
-            <button class="large-btn github-btn">
-              conectar com
-              <span>google</span>
-            </button>
-            <button class="large-btn facebook-btn">
-              conectar com
-              <span>facebook</span>
-            </button>
           </div>
         </div>
       </div>
@@ -47,6 +90,7 @@
 <script>
 const MODAL_WIDTH = 328;
 import http from "../http-common";
+import { all } from "q";
 export default {
   name: "SignUp",
   data() {
@@ -59,7 +103,8 @@ export default {
       CPF: "",
       CNPJ: "",
       data_nascimento: "",
-      sexo: ""
+      sexo: "M",
+      selected: "F"
     };
   },
   created() {
@@ -68,19 +113,85 @@ export default {
   },
   methods: {
     signup() {
-      if (this.email && this.password) {
-        http
-          .post("/user", {
-            tpusuario: "S",
-            email: this.email,
-            password: this.password
-          })
-          .then(response => {
-            alert("Usuario cadasttrado com sucesso");
-          });
+      if (this.selected == "F") {
+        if (this.email && this.nome && this.CPF && this.data_nascimento) {
+          if (this.password.length < 5 || this.password.length > 15) {
+            if (this.password.length < 5) {
+              alert("Senha muito curta\nPreencha com pelo menos 5 caracteres");
+            } else {
+              alert("Senha muito longa");
+            }
+          } else if (this.nome.length < 5 || this.nome.length > 30) {
+            if (this.nome.length < 5) {
+              alert("Nome muito curto\n R U a robot?");
+            } else {
+              alert("Nome muito longo");
+            }
+          } else if (this.CPF.length != 11) {
+            alert("CPF invalido");
+          } else if (this.data_nascimento.length != 10) {
+            alert("Informe uma data valida");
+          } else if (this.email.length < 5 || this.email.length > 50) {
+            if (this.email.length < 5) {
+              alert("Email muito curto");
+            } else {
+              alert("Email muito longo");
+            }
+          } else {
+            let d = this.data_nascimento.split("-");
+            alert(d);
+            if (d[0].length != 2 || d[1].length != 2 || d[2].length != 4) {
+              alert("Insira uma data valida");
+            } else {
+              alert("Usuario (Pessoa Fisica) cadastrado com sucesso");
+              // Realizar cadastro
+            }
+          }
+        } else {
+          alert("Preencha todos os campos corretamente");
+        }
       } else {
-        alert("Preencha os campos");
+        if (this.CNPJ && this.nome_fantasia && this.password && this.email) {
+          if (this.CNPJ.length != 14) {
+            alert("Insira um CNPJ valido");
+          } else if (nome_fantasia.length < 5 || nome_fantasia.length > 50) {
+            if (nome_fantasia.length < 5) {
+              alert("Nome muito curto");
+            } else {
+              alert("Nome muito longo");
+            }
+          } else if (this.password.length < 5 || this.password.length > 15) {
+            if (this.password.length < 5) {
+              alert("Senha muito curta");
+            } else {
+              alert("Senha muito longa");
+            }
+          } else if (this.email.length < 5 || this.email.length > 50) {
+            if (this.email.length < 5) {
+              alert("Email muito curto");
+            } else {
+              alert("Email muito longo");
+            }
+          } else {
+            alert("Usuario (Pessoa Juridica) cadastrada com sucesso");
+          }
+        } else {
+          alert("Preencha todos os campos corretamente");
+        }
       }
+      // if (this.email && this.password) {
+      //   http
+      //     .post("/user", {
+      //       tpusuario: "S",
+      //       email: this.email,
+      //       password: this.password
+      //     })
+      //     .then(response => {
+      //       alert("Usuario cadastrado com sucesso");
+      //     });
+      // } else {
+      //   alert("Preencha os campos");
+      // }
     }
   }
 };
