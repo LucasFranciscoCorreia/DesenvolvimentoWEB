@@ -17,13 +17,14 @@
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <i class="fas fa-user"></i> {{nomeUser}}
+              <i class="fas fa-user"></i>
+              {{nomeUser}}
             </a>
             <div
               class="dropdown-menu dropdown-menu-right dropdown-info"
               aria-labelledby="navbarDropdownMenuLink-4"
             >
-              <a class="dropdown-item" @click="selected='MinhaConta'" >Minha conta</a>
+              <a class="dropdown-item" @click="selected='MinhaConta'">Minha conta</a>
               <a class="dropdown-item" @click="logout(); selected='Inicio'">Sair</a>
             </div>
           </li>
@@ -94,13 +95,13 @@
                       type="submit"
                       style="border-radius: 2rem"
                     >
-                      <a v-on:click="login(); selected = 'MinhaConta'" >Sign in</a>
+                      <a @click="login()">Sign in</a>
                     </button>
 
                     <!-- Register -->
                     <p>
                       Not a member?
-                      <a >Register</a>
+                      <a>Register</a>
                     </p>
                   </form>
                   <!-- Form -->
@@ -248,6 +249,7 @@ import Servico from "./components/Servicos.vue";
 import Produto from "./components/Produtos.vue";
 import Contato from "./components/Contato.vue";
 import http from "./http-common";
+
 export default {
   name: "app",
   components: {
@@ -267,46 +269,35 @@ export default {
       isLogged: false,
       email: "",
       password: "",
-      user: "",
+      user: null,
       users: [],
-      nomeUser:"Maria M"
+      nomeUser: "Maria M"
     };
   },
-  props:{
-    entra:Boolean
-  },
+  props: {},
   computed: {},
   methods: {
-    login(){/*alert(this.entra)
+    login() {
       if (this.email && this.password) {
-        var url = "/users/filter?email=" + this.email
-         http.get(url)
-          .then(response  => {
-              
-            if(response.data[0].password==(this.password)){
-              this.entra= true
-            }else{
-              this.entra= false
-            }
- 
-          });
-
-          alert(this.entra)
-          if(this.entra){
-              alert("Usuario conectado")
-              this.isLogged = true;
-              
-            }else{
-              alert("Usuario ou senha incorreta")
-            }
-      }else{
-        alert("Preencha os campos")
+        var url = "/users/filter?email=" + this.email;
+        http.get(url).then(response => {
+          if (response.data[0].password == this.password) {
+            this.user = response.data[0];
+            this.selected = "MinhaConta";
+          }
+        });
+        if (this.user) {
+          alert("Usuario conectado");
+          this.isLogged = true;
+        } else {
+          alert("Usuario ou senha incorreta");
+        }
+      } else {
+        alert("Preencha os campos");
       }
-      
-      */
-      this.isLogged = true;
+      // this.isLogged = true;
     },
-    logout(){
+    logout() {
       this.isLogged = false;
     }
   }
@@ -314,6 +305,5 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
 

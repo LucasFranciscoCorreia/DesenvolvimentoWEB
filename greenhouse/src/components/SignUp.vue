@@ -9,10 +9,15 @@
               <div class="autocomplete-fix">
                 <input type="password">
               </div>
+              <div class="row">
+                <div class="custom-control custom-radio">
+                  <input type="radio" class="custom-control-input" id="defaultUnchecked" name="defaultExampleRadios">
+                  <label class="custom-control-label" for="defaultUnchecked">Default unchecked</label>
+                </div>
+              </div>
+              <div></div>
 
-              <input v-model="email" id="n-email" type="text" placeholder="Email">
-              <input v-model="username" id="n-username" type="text" placeholder="Usuário">
-              <input v-model="password" id="n-password2" type="password" placeholder="Senha">
+              <div></div>
             </form>
 
             <div style="margin-top: 42px"></div>
@@ -49,7 +54,12 @@ export default {
       modalWidth: MODAL_WIDTH,
       email: "",
       password: "",
-      username: ""
+      nome: "",
+      nome_fantasia: "",
+      CPF: "",
+      CNPJ: "",
+      data_nascimento: "",
+      sexo: ""
     };
   },
   created() {
@@ -66,10 +76,10 @@ export default {
             password: this.password
           })
           .then(response => {
-            alert("Usuario cadasttrado com sucesso")
+            alert("Usuario cadasttrado com sucesso");
           });
-      }else{
-        alert("Preencha os campos")
+      } else {
+        alert("Preencha os campos");
       }
     }
   }
