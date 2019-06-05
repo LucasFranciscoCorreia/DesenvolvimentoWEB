@@ -1,6 +1,6 @@
 <template>
-  <modal name="demo-login" transition="pop-out" :width="modalWidth" :height="400">
-    <div class="box">
+  <modal name="demo-login" transition="pop-out" :width="modalWidth" :height="550">
+    <div class="box" >
       <div class="box-part" id="bp-left">
         <div class="partition" id="partition-register">
           <div class="partition-title">CRIAR CONTA</div>
@@ -95,6 +95,7 @@ export default {
   data() {
     return {
       modalWidth: MODAL_WIDTH,
+      modalHeight:MODAL_HEIGHT,
       email: "",
       password: "",
       nome: "",
@@ -228,7 +229,8 @@ $facebook_color: #3880ff;
   background: white;
   overflow: hidden;
   width: 656px;
-  height: 400px;
+  height: 550px;
+  
   border-radius: 2px;
   box-sizing: border-box;
   box-shadow: 0 0 40px black;
