@@ -229,7 +229,7 @@ $facebook_color: #3880ff;
   background: white;
   overflow: hidden;
   width: 656px;
-  height: 550px;
+  height: 100%;
   
   border-radius: 2px;
   box-sizing: border-box;
