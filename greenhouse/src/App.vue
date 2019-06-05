@@ -35,7 +35,8 @@
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
-            >Sign in</a>
+            >
+            <i></i>Sign in</a>
             <div
               class="dropdown-menu dropdown-menu-right dropdown-info"
               aria-labelledby="navbarDropdownMenuLink-4"
@@ -285,13 +286,16 @@ export default {
             this.user = response.data[0];
             this.selected = "MinhaConta";
           }
-        });
-        if (this.user) {
-          alert("Usuario conectado");
+
+          if (this.user) {
+          //alert("Usuario conectado");
           this.isLogged = true;
+        
         } else {
           alert("Usuario ou senha incorreta");
         }
+        });
+        
       } else {
         alert("Preencha os campos");
       }
