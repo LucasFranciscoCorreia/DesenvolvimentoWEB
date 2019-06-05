@@ -4,7 +4,6 @@ import br.ufrpe.greenhouse.entities.Usuario;
 import br.ufrpe.greenhouse.repositories.RepositorioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,19 +21,19 @@ public class UsuarioService{
         return this.repositorio.findAll();
     }
 
-  public Usuario read(Long id) throws Exception {
-    Optional<Usuario> user = this.repositorio.findById(id);
-    if (!user.isPresent()) {
-      throw new Exception("Curso não encontrado");
+    public Usuario read(Long id) throws Exception {
+        Optional<Usuario> user = this.repositorio.findById(id);
+        if (!user.isPresent()) {
+            throw new Exception("Usuario não encontrado");
+        }
+
+        return user.get();
     }
 
-    return user.get();
-  }
-
-  public List<Usuario> filterBy(String email) {
+    public List<Usuario> filterBy(String email) {
     return this.repositorio.findByEmail(email);
   }
-  public void insert(Usuario user) throws Exception{
+    public void insert(Usuario user){
         repositorio.save(user);
     }
 }

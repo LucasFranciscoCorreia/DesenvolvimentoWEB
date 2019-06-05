@@ -39,8 +39,8 @@
               </div>
 
               <div v-if="selected == 'F'" style class="py-1">
-                <input type="text" placeholder="Email" v-model="email" id="n-email">
-                <input type="password" placeholder="Password" v-model="password" id="n-password2">
+                <input type="text" placeholder="Email" v-model="email">
+                <input type="password" placeholder="Password" v-model="password">
                 <input type="text" placeholder="Nome" v-model="nome">
                 <input type="text" placeholder="CPF" v-model="CPF">
                 <div class="row" style="margin:auto;padding-left:20%">
@@ -67,8 +67,8 @@
               </div>
 
               <div v-else style class="py-1">
-                <input type="text" placeholder="Email" v-model="email" id="n-email">
-                <input type="password" placeholder="Password" v-model="password" id="n-password2">
+                <input type="text" placeholder="Email" v-model="email">
+                <input type="password" placeholder="Password" v-model="password">
                 <input type="text" placeholder="Nome" v-model="nome_fantasia">
                 <input type="text" placeholder="CNPJ" v-model="CNPJ">
               </div>
@@ -138,12 +138,37 @@ export default {
             }
           } else {
             let d = this.data_nascimento.split("-");
-            alert(d);
             if (d[0].length != 2 || d[1].length != 2 || d[2].length != 4) {
               alert("Insira uma data valida");
             } else {
-              alert("Usuario (Pessoa Fisica) cadastrado com sucesso");
-              // Realizar cadastro
+              let user = http.get("users/email/" + this.email);
+              let fisico = http.get("fisicos/cpf/" + this.CPF);
+
+              if (user.data || fisico.data) {
+                alert("Usuario (Pessoa Fisica) já cadastrado no sistema");
+              } else {
+                let data = new Date();
+                data.setFullYear(d[2], d[1], d[0]);
+                http
+                  .post("/adduser", {
+                    tpusuario: this.sexo,
+                    email: this.email,
+                    password: this.password
+                  })
+                  .then(function() {
+                    console.log(http.get("/users/email/" + this.email).data);
+                    alert("começou");
+                    http.post("/addfisico", {
+                      fk_id_usuario: http.get("/users/email/" + this.email)
+                        .data[0].idusuario,
+                      nome: this.nome,
+                      cpf: this.cpf,
+                      sexo: this.sexo,
+                      data_nascimento: data
+                    });
+                    alert("Usuario (Pessoa Fisica) cadastrado com sucesso");
+                  });
+              }
             }
           }
         } else {
@@ -153,7 +178,10 @@ export default {
         if (this.CNPJ && this.nome_fantasia && this.password && this.email) {
           if (this.CNPJ.length != 14) {
             alert("Insira um CNPJ valido");
-          } else if (this.nome_fantasia.length < 5 || this.nome_fantasia.length > 50) {
+          } else if (
+            this.nome_fantasia.length < 5 ||
+            this.nome_fantasia.length > 50
+          ) {
             if (this.nome_fantasia.length < 5) {
               alert("Nome muito curto");
             } else {
