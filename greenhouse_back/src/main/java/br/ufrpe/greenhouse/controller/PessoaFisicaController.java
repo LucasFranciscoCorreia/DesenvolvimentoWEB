@@ -21,7 +21,7 @@ public class PessoaFisicaController {
     public PessoaFisica readFisico(@PathVariable Long id) throws Exception{
         return this.service.read(id);
     }
-    @GetMapping(value = "/fisicos/nome/{cpf}")
+    @GetMapping(value = "/fisicos/cpf   /{cpf}")
     public PessoaFisica filterBy(@PathVariable String cpf) throws Exception{
         return this.service.filterBy(cpf);
     }

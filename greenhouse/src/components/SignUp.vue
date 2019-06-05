@@ -111,7 +111,7 @@ export default {
       window.innerWidth < MODAL_WIDTH ? MODAL_WIDTH / 2 : MODAL_WIDTH;
   },
   methods: {
-    signup() {
+    async signup() {
       if (this.selected == "F") {
         if (this.email && this.nome && this.CPF && this.data_nascimento) {
           if (this.password.length < 5 || this.password.length > 15) {
@@ -143,31 +143,27 @@ export default {
             } else {
               let user = http.get("users/email/" + this.email);
               let fisico = http.get("fisicos/cpf/" + this.CPF);
-
               if (user.data || fisico.data) {
                 alert("Usuario (Pessoa Fisica) já cadastrado no sistema");
               } else {
                 let data = new Date();
                 data.setFullYear(d[2], d[1], d[0]);
-                http
-                  .post("/adduser", {
-                    tpusuario: this.sexo,
-                    email: this.email,
-                    password: this.password
-                  })
-                  .then(function() {
-                    console.log(http.get("/users/email/" + this.email).data);
-                    alert("começou");
-                    http.post("/addfisico", {
-                      fk_id_usuario: http.get("/users/email/" + this.email)
-                        .data[0].idusuario,
-                      nome: this.nome,
-                      cpf: this.cpf,
-                      sexo: this.sexo,
-                      data_nascimento: data
-                    });
-                    alert("Usuario (Pessoa Fisica) cadastrado com sucesso");
-                  });
+                http.post("/adduser", {
+                  'tpusuario': this.selected,
+                  'email': this.email,
+                  'password': this.password
+                });
+                //console.log(http.get("/users/email/" + this.email).data);
+                coisa  = http.get("/users/email/" + this.email);
+                console.log(coisa);
+                http.post("/addfisico", {
+                  'fk_id_usuario': http.get("/users/email/" + this.email).data[0].idusuario,
+                  'nome': this.nome,
+                  'cpf': this.cpf,
+                  'sexo': this.sexo,
+                  'data_nascimento': data
+                });
+                alert("Usuario (Pessoa Fisica) cadastrado com sucesso");
               }
             }
           }
