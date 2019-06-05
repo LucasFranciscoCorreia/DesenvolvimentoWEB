@@ -90,7 +90,6 @@
 <script>
 const MODAL_WIDTH = 328;
 import http from "../http-common";
-import { all } from "q";
 export default {
   name: "SignUp",
   data() {
@@ -154,8 +153,8 @@ export default {
         if (this.CNPJ && this.nome_fantasia && this.password && this.email) {
           if (this.CNPJ.length != 14) {
             alert("Insira um CNPJ valido");
-          } else if (nome_fantasia.length < 5 || nome_fantasia.length > 50) {
-            if (nome_fantasia.length < 5) {
+          } else if (this.nome_fantasia.length < 5 || this.nome_fantasia.length > 50) {
+            if (this.nome_fantasia.length < 5) {
               alert("Nome muito curto");
             } else {
               alert("Nome muito longo");
