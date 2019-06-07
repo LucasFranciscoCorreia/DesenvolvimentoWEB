@@ -23,23 +23,17 @@ public class UsuarioController{
         return this.service.read(id);
     }
 
-    /*@GetMapping(value="/users/email/{email}")
-    public List<Usuario> filterBy(@PathVariable String email) {
-        return this.service.filterBy(email);
-    }
-    */
    @GetMapping(path="/users/filter")
     public List<Usuario> filterBy(@RequestParam String email) {
       return this.service.filterBy(email);
     }
 
     @PostMapping(value = "/adduser")
-    public Long addUser(@RequestBody Usuario user) throws Exception {
+    public void addUser(@RequestBody Usuario user) throws Exception{
         List<Usuario> users = this.users();
-        if (!users.contains(user))
+        if(!users.contains(user))
             this.service.insert(user);
         else
             throw new Exception("Usuario ja cadastrado");
-        return user.getIdusuario();
     }
 }

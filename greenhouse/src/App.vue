@@ -4,12 +4,11 @@
       <div class="collapse navbar-collapse ml-auto" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <div v-for="tab in tabs" :key="tab">
-            <!-- <NaviItem :tab="tab" :isLogged="isLogged" :store="store"/> -->
             <li :class="['nav-item',{active: selected == tab}]">
               <a :class="['nav-link',{disabled: selected == tab}]" @click="selected = tab">{{tab}}</a>
             </li>
           </div>
-          <li v-if="isLogged" class="nav-item dropdown">
+          <li v-if="user != undefined" class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
               id="navbarDropdownMenuLink-4"
@@ -18,7 +17,7 @@
               aria-expanded="false"
             >
               <i class="fas fa-user"></i>
-              {{nomeUser}}
+              {{user.nome}}
             </a>
             <div
               class="dropdown-menu dropdown-menu-right dropdown-info"
@@ -118,10 +117,10 @@
         </ul>
       </div>
     </nav>
-    <component :is="selected" :isLogged="isLogged" :carrinho="cart"></component>
+    <component :is="selected" :isLogged="user != undefined" :carrinho="cart"></component>
     <!-- <router-view :isLogged="isLogged" :key="isLogged"></router-view> -->
     <div
-      v-if="!isLogged"
+      v-if="user == undefined"
       id="banner_home"
       class="py-4"
       style="background-color: #0EBE57;color: white;"
@@ -259,14 +258,13 @@ import ProdutoLogado from "./components/ProdutoLogado.vue";
 
 import http from "./http-common";
 
-
 class Item {
   constructor(nome, preco, srcPhoto, qtd, id) {
     this.nome = nome;
     this.preco = preco;
     this.srcPhoto = srcPhoto;
     this.qtd = qtd;
-    this.id = id
+    this.id = id;
   }
 }
 export default {
@@ -283,28 +281,19 @@ export default {
     Carrinho,
     ServicoLogado,
     ProdutoLogado
-    
   },
   data: () => {
     return {
       tabs: ["Inicio", "Sobre", "Servico", "Produto", "Contato"],
       selected: "Inicio",
-      isLogged: false,
       email: "",
       password: "",
       user: null,
-      users: [],
-      nomeUser: "Maria M",
-      cart:[], 
-      
+      pessoa: null,
+      cart: []
     };
   },
-  props: {
-    
-  },
-  computed: {},
   methods: {
-
     async login() {
       if (this.email && this.password) {
         var url = "/users/filter?email=" + this.email;
@@ -312,22 +301,19 @@ export default {
           if (response.data[0].password == this.password) {
             this.user = response.data[0];
             this.selected = "MinhaConta";
-          }else{
-            alert("email ou senha incorreta")
+          } else {
+            alert("email ou senha incorreta");
           }
-          if (this.user) {
-            this.isLogged = true;
-          }else{
-            alert("usuario não cadastrado")
+          if (this.user == undefined) {
+            alert("usuario não cadastrado");
           }
         });
       } else {
         alert("Preencha os campos");
       }
-       this.isLogged = true;
     },
     logout() {
-      this.isLogged = false;
+      this.user = undefined;
     }
   }
 };
