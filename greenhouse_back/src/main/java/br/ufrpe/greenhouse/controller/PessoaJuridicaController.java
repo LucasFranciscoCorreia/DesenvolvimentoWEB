@@ -18,7 +18,7 @@ public class PessoaJuridicaController {
     public List<PessoaJuridica> juridicos() {return service.getAllFisicos();}
 
     @GetMapping(value = "/juridicos/id/{id}")
-    public PessoaJuridica readFisico(@PathVariable Long id) throws Exception{
+    public PessoaJuridica readJuridico(@PathVariable Long id) throws Exception{
         return this.service.read(id);
     }
     @GetMapping(value = "/juridicos/nome/{nome}")
@@ -27,13 +27,14 @@ public class PessoaJuridicaController {
     }
 
     @PostMapping(value = "addjuridico")
-    public void addFisico(@RequestBody PessoaJuridica pj) throws Exception{
+    public Long addJuridico(@RequestBody PessoaJuridica pj) throws Exception{
         List<PessoaJuridica> list = this.juridicos();
         if(!list.contains(pj)){
             this.service.insert(pj);
         }else{
             throw new Exception("Pessoa Juridica Já Cadastrada");
         }
+        return pj.getId_usu_juridico();
     }
 
 }

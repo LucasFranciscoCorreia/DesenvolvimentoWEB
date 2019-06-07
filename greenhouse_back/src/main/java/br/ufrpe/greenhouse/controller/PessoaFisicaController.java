@@ -27,12 +27,13 @@ public class PessoaFisicaController {
     }
 
     @PostMapping(value = "/addfisico")
-    public void addFisico(@RequestBody PessoaFisica pf) throws Exception{
+    public Long addFisico(@RequestBody PessoaFisica pf) throws Exception {
         List<PessoaFisica> list = this.fisicos();
-        if(!list.contains(pf)){
+        if (!list.contains(pf)) {
             this.service.insert(pf);
-        }else{
+        } else {
             throw new Exception("Pessoa Fisica Já Cadastrada");
         }
+        return pf.getId_usu_fisico();
     }
 }

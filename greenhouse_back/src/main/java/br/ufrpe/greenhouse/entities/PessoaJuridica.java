@@ -12,14 +12,14 @@ public class PessoaJuridica {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_usu_juridico")
-    private Long id_usu__juridico;
+    private Long id_usu_juridico;
 
-    @Column(name="fk_id_usuario")
+    @Column(name="fk_id_usuario", nullable = false)
     private Long fk_id_usuario;
 
-    @Column(name="nome_fantasia")
+    @Column(name="nome_fantasia", nullable = false)
     private String nome;
 
-    @Column(name="cnpj")
+    @Column(name="cnpj", nullable = false)
     private String cnpj;
 }

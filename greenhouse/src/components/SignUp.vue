@@ -1,6 +1,6 @@
 <template>
   <modal name="demo-login" transition="pop-out" :width="modalWidth" :height="550">
-    <div class="box" >
+    <div class="box">
       <div class="box-part" id="bp-left">
         <div class="partition" id="partition-register">
           <div class="partition-title">CRIAR CONTA</div>
@@ -72,33 +72,22 @@
                 <input type="text" placeholder="Nome" v-model="nome_fantasia">
                 <input type="text" placeholder="CNPJ" v-model="CNPJ">
               </div>
-
-                    <div class="row">
-                        <div class="col-sm-12 col-md-12 col-lg-12">
-                            <input type="text" placeholder="Endereco" v-model="endereco">
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-                            <input type="password" placeholder="Complemento" v-model="password">
-                        </div>
-
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-                            <input type="password" placeholder="Número" v-model="password">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-                            <input type="text" placeholder="CEP" v-model="nome">
-                        </div>
-
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-                            <input type="text" placeholder="Telefone" v-model="CPF">
-                        </div>
-                    </div>
-                    
+              <div>
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                  <input type="text" placeholder="CEP" v-model="CEP" @keyup="findAddress()">
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                  <input type="text" placeholder="Endereco" v-model="endereco" disabled>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <input type="text" placeholder="Complemento" v-model="complemento">
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <input type="text" placeholder="Número" v-model="numero">
+                </div>
+              </div>
             </form>
 
             <div class="button-set" style="text-align: center;">
@@ -116,7 +105,7 @@
 
 <script>
 const MODAL_WIDTH = 328;
-const MODAL_HEIGHT = 480
+const MODAL_HEIGHT = 480;
 import http from "../http-common";
 export default {
   name: "SignUp",
@@ -132,7 +121,11 @@ export default {
       CNPJ: "",
       data_nascimento: "",
       sexo: "M",
-      selected: "F"
+      selected: "F",
+      endereco: "",
+      numero: 0,
+      complemento: "",
+      CEP: ""
     };
   },
   created() {
@@ -140,9 +133,33 @@ export default {
       window.innerWidth < MODAL_WIDTH ? MODAL_WIDTH / 2 : MODAL_WIDTH;
   },
   methods: {
+    findAddress() {
+      if (this.CEP.length == 8) {
+        http
+          .get("https://viacep.com.br/ws/" + this.CEP + "/json")
+          .then(response => {
+            this.endereco = response.data.logradouro;
+          })
+          .catch(error => {
+            this.endereco = "";
+            alert("Digite um CEP valido");
+          });
+      } else {
+        this.endereco = "";
+      }
+    },
     async signup() {
       if (this.selected == "F") {
-        if (this.email && this.nome && this.CPF && this.data_nascimento) {
+        if (
+          this.email &&
+          this.nome &&
+          this.CPF &&
+          this.data_nascimento &&
+          this.CEP &&
+          this.endereco &&
+          this.numero &&
+          this.complemento
+        ) {
           if (this.password.length < 5 || this.password.length > 15) {
             if (this.password.length < 5) {
               alert("Senha muito curta\nPreencha com pelo menos 5 caracteres");
@@ -165,55 +182,43 @@ export default {
             } else {
               alert("Email muito longo");
             }
+          } else if (this.numero < 1) {
+            alert("Informe um numero valido");
+          } else if (
+            this.complemento.length < 5 ||
+            this.complemento.length > 50
+          ) {
+            if (this.complemento.length < 5) {
+              alert("Complemento muito pequeno");
+            } else {
+              alert("Complemento muito longo");
+            }
           } else {
             let d = this.data_nascimento.split("-");
             if (d[0].length != 2 || d[1].length != 2 || d[2].length != 4) {
               alert("Insira uma data valida");
             } else {
-              var user;
-               http.get("users/filter?email=" + this.email)
-              .then(response => {
-                if (response.data[0]) {
-                  alert("Usuario (Pessoa Fisica) já cadastrado no sistema");
-                }
-                else{
-                  http.get("fisicos/cpf/" + this.CPF)
-                  .then(response => {
-                  if (response.data[0]) {
-                  alert("Usuario (Pessoa Fisica) já cadastrado no sistema");
-                  }else{
-                    
-                let data = new Date();
-                data.setFullYear(d[2], d[1], d[0]);
-                http.post("/adduser", {
-                  'tpusuario': this.selected,
-                  'email': this.email,
-                  'password': this.password
-                }).then(function () {
-                  http.get("/users/filter?email=" + this.email).then(response => {
-                                alert(response.data[0].idusuario)
-                              http.post("/addfisico", {
-                              'fk_id_usuario': response.data[0].idusuario,
-                              'nome': this.nome,
-                              'cpf': this.cpf,
-                              'sexo': this.sexo,
-                              //'data_nascimento': data
-                              }).then(function(){
-                                 alert("Usuario (Pessoa Fisica) cadastrado com sucesso");
-                              });
-                            });
-              })
-                
-                
-                
-
-                
-               
-                }
-                });
-              }
-            });
-              
+              d = d[2] + "-" + d[1] + "-" + d[0];
+              let id = await http.post("/adduser", {
+                tpusuario: this.selected,
+                email: this.email,
+                password: this.password
+              });
+              await http.post("/addfisico", {
+                fk_id_usuario: id.data,
+                sexo: this.sexo,
+                cpf: this.CPF,
+                data_nascimento: d,
+                nome: this.nome
+              });
+              await http.post("/addendereco", {
+                fk_id_usuario: id.data,
+                rua: this.endereco,
+                numero: this.numero,
+                complemento: this.complemento,
+                cep: this.CEP
+              });
+              alert("Cadastro realizado com sucesso com sucesso com id ");
             }
           }
         } else {
@@ -245,25 +250,69 @@ export default {
               alert("Email muito longo");
             }
           } else {
-            alert("Usuario (Pessoa Juridica) cadastrada com sucesso");
+            if (
+              this.email &&
+              this.password &&
+              this.CNPJ &&
+              this.nome_fantasia &&
+              this.CEP &&
+              this.endereco &&
+              this.complemento &&
+              this.numero
+            ) {
+              if (this.password.length < 5 || this.password.length > 15) {
+                if (this.password.length < 5) {
+                  alert(
+                    "Senha muito curta\nPreencha com pelo menos 5 caracteres"
+                  );
+                } else {
+                  alert("Senha muito longa");
+                }
+              } else if (
+                this.nome_fantasia.length < 5 ||
+                this.nome_fantasia.length > 30
+              ) {
+                if (this.nome_fantasia.length < 5) {
+                  alert("Nome muito curto\n R U a robot?");
+                } else {
+                  alert("Nome muito longo");
+                }
+              } else if (this.CNPJ.length != 14) {
+                alert("CNPJ invalido");
+              } else if (this.complemento.length < 5 || this.complemento > 50) {
+                if (this.complemento.length < 5) {
+                  alert("Complemento muito pequeno");
+                } else {
+                  alert("Complemento muito longo");
+                }
+              } else if (this.numero <= 0) {
+                alert("Informe um numero valido");
+              } else {
+                let id = await http.post("/adduser", {
+                  tpusuario: this.selected,
+                  email: this.email,
+                  password: this.password
+                });
+                await http.post("/addjuridico", {
+                  fk_id_usuario:  id.data,
+                  cnpj: this.CNPJ,
+                  nome: this.nome_fantasia
+                });
+                await http.post("/addendereco", {
+                  fk_id_usuario: id.data,
+                  rua: this.endereco,
+                  numero: this.numero,
+                  complemento: this.complemento,
+                  cep: this.CEP
+                });
+              }
+              alert("Usuario (Pessoa Juridica) cadastrada com sucesso");
+            }
           }
         } else {
           alert("Preencha todos os campos corretamente");
         }
       }
-      // if (this.email && this.password) {
-      //   http
-      //     .post("/user", {
-      //       tpusuario: "S",
-      //       email: this.email,
-      //       password: this.password
-      //     })
-      //     .then(response => {
-      //       alert("Usuario cadastrado com sucesso");
-      //     });
-      // } else {
-      //   alert("Preencha os campos");
-      // }
     }
   }
 };
@@ -278,7 +327,7 @@ $facebook_color: #3880ff;
   overflow: hidden;
   width: 656px;
   height: 100%;
-  
+
   border-radius: 2px;
   box-sizing: border-box;
   box-shadow: 0 0 40px black;

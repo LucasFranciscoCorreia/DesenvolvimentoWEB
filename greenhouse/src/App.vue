@@ -305,18 +305,20 @@ export default {
   computed: {},
   methods: {
 
-    login() {
+    async login() {
       if (this.email && this.password) {
         var url = "/users/filter?email=" + this.email;
-        http.get(url).then(response => {
+        await http.get(url).then(response => {
           if (response.data[0].password == this.password) {
             this.user = response.data[0];
             this.selected = "MinhaConta";
+          }else{
+            alert("email ou senha incorreta")
           }
           if (this.user) {
             this.isLogged = true;
-          } else {
-            alert("Usuario ou senha incorreta");
+          }else{
+            alert("usuario não cadastrado")
           }
         });
       } else {
