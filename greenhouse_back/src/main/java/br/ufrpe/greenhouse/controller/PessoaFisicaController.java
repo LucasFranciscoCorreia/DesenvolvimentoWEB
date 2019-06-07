@@ -21,12 +21,12 @@ public class PessoaFisicaController {
     public PessoaFisica readFisico(@PathVariable Long id) throws Exception{
         return this.service.read(id);
     }
-    @GetMapping(value = "/fisicos/cpf   /{cpf}")
+    @GetMapping(value = "/fisicos/cpf/{cpf}")
     public PessoaFisica filterBy(@PathVariable String cpf) throws Exception{
         return this.service.filterBy(cpf);
     }
 
-    @PostMapping(value = "addfisico")
+    @PostMapping(value = "/addfisico")
     public void addFisico(@RequestBody PessoaFisica pf) throws Exception{
         List<PessoaFisica> list = this.fisicos();
         if(!list.contains(pf)){

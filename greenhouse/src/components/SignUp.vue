@@ -170,30 +170,50 @@ export default {
             if (d[0].length != 2 || d[1].length != 2 || d[2].length != 4) {
               alert("Insira uma data valida");
             } else {
-              let user = http.get("users/email/" + this.email);
-              let fisico = http.get("fisicos/cpf/" + this.CPF);
-              if (user.data || fisico.data) {
-                alert("Usuario (Pessoa Fisica) já cadastrado no sistema");
-              } else {
+              var user;
+               http.get("users/filter?email=" + this.email)
+              .then(response => {
+                if (response.data[0]) {
+                  alert("Usuario (Pessoa Fisica) já cadastrado no sistema");
+                }
+                else{
+                  http.get("fisicos/cpf/" + this.CPF)
+                  .then(response => {
+                  if (response.data[0]) {
+                  alert("Usuario (Pessoa Fisica) já cadastrado no sistema");
+                  }else{
+                    
                 let data = new Date();
                 data.setFullYear(d[2], d[1], d[0]);
                 http.post("/adduser", {
                   'tpusuario': this.selected,
                   'email': this.email,
                   'password': this.password
+                }).then(function () {
+                  http.get("/users/filter?email=" + this.email).then(response => {
+                                alert(response.data[0].idusuario)
+                              http.post("/addfisico", {
+                              'fk_id_usuario': response.data[0].idusuario,
+                              'nome': this.nome,
+                              'cpf': this.cpf,
+                              'sexo': this.sexo,
+                              //'data_nascimento': data
+                              }).then(function(){
+                                 alert("Usuario (Pessoa Fisica) cadastrado com sucesso");
+                              });
+                            });
+              })
+                
+                
+                
+
+                
+               
+                }
                 });
-                //console.log(http.get("/users/email/" + this.email).data);
-                var coisa  = http.get("/users/email/" + this.email);
-                console.log(coisa);
-                http.post("/addfisico", {
-                  'fk_id_usuario': http.get("/users/email/" + this.email).data[0].idusuario,
-                  'nome': this.nome,
-                  'cpf': this.cpf,
-                  'sexo': this.sexo,
-                  'data_nascimento': data
-                });
-                alert("Usuario (Pessoa Fisica) cadastrado com sucesso");
               }
+            });
+              
             }
           }
         } else {

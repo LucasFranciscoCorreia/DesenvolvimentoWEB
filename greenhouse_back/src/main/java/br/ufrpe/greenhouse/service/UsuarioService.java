@@ -33,7 +33,8 @@ public class UsuarioService{
     public List<Usuario> filterBy(String email) {
     return this.repositorio.findByEmail(email);
   }
-    public void insert(Usuario user){
-        repositorio.save(user);
-    }
+
+  public void insert(Usuario user) throws Exception{
+    repositorio.save(user);
+  }
 }
