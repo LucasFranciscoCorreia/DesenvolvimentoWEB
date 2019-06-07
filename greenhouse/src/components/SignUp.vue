@@ -89,13 +89,14 @@
 
 <script>
 const MODAL_WIDTH = 328;
+const MODAL_HEIGHT = 480
 import http from "../http-common";
 export default {
   name: "SignUp",
   data() {
     return {
       modalWidth: MODAL_WIDTH,
-      modalHeight:MODAL_HEIGHT,
+      modalHeight: MODAL_HEIGHT,
       email: "",
       password: "",
       nome: "",
@@ -155,7 +156,7 @@ export default {
                   'password': this.password
                 });
                 //console.log(http.get("/users/email/" + this.email).data);
-                coisa  = http.get("/users/email/" + this.email);
+                var coisa  = http.get("/users/email/" + this.email);
                 console.log(coisa);
                 http.post("/addfisico", {
                   'fk_id_usuario': http.get("/users/email/" + this.email).data[0].idusuario,
