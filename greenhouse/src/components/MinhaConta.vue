@@ -120,7 +120,7 @@ export default {
   },
   props: {
     isLogged: Boolean
-  },
+      },
   data: () => {
     return {
       items: [new HistoricolItem("Serviço de Coleta de Lixo","11/02/2019","assets/truck.png"),

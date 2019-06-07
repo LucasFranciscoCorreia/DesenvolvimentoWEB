@@ -4,6 +4,8 @@ import lombok.Data;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Map;
 
 @Entity
 @Data
@@ -24,6 +26,9 @@ public class Usuario{
     @Column(name = "password")
     private String password;
 
+  /*@Column(name = "carrinho")
+  private List<Item> carrinho;*/
+
     public Usuario(){
 
     }
@@ -38,7 +43,39 @@ public class Usuario{
         return false;
     }
 
-    @Override
+  public Long getIdusuario() {
+    return idusuario;
+  }
+
+  public void setIdusuario(Long idusuario) {
+    this.idusuario = idusuario;
+  }
+
+  public String getTpusuario() {
+    return tpusuario;
+  }
+
+  public void setTpusuario(String tpusuario) {
+    this.tpusuario = tpusuario;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  @Override
     public int hashCode() {
         return super.hashCode();
     }

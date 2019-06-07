@@ -25,6 +25,9 @@
               aria-labelledby="navbarDropdownMenuLink-4"
             >
               <a class="dropdown-item" @click="selected='MinhaConta'">Minha conta</a>
+              <a class="dropdown-item" @click="selected='Carrinho'">Carrinho</a>
+              <a class="dropdown-item" @click="selected='ServicoLogado'">servico</a>
+              <a class="dropdown-item" @click="selected='ProdutoLogado'">produto</a>
               <a class="dropdown-item" @click="logout(); selected='Inicio'">Sair</a>
             </div>
           </li>
@@ -115,7 +118,7 @@
         </ul>
       </div>
     </nav>
-    <component :is="selected" :isLogged="isLogged"></component>
+    <component :is="selected" :isLogged="isLogged" :carrinho="cart"></component>
     <!-- <router-view :isLogged="isLogged" :key="isLogged"></router-view> -->
     <div
       v-if="!isLogged"
@@ -250,8 +253,22 @@ import MinhaConta from "./components/MinhaConta.vue";
 import Servico from "./components/Servicos.vue";
 import Produto from "./components/Produtos.vue";
 import Contato from "./components/Contato.vue";
+import Carrinho from "./components/Carrinho.vue";
+import ServicoLogado from "./components/ServicoLogado.vue";
+import ProdutoLogado from "./components/ProdutoLogado.vue";
+
 import http from "./http-common";
 
+
+class Item {
+  constructor(nome, preco, srcPhoto, qtd, id) {
+    this.nome = nome;
+    this.preco = preco;
+    this.srcPhoto = srcPhoto;
+    this.qtd = qtd;
+    this.id = id
+  }
+}
 export default {
   name: "app",
   components: {
@@ -262,7 +279,11 @@ export default {
     MinhaConta,
     Servico,
     Produto,
-    Contato
+    Contato,
+    Carrinho,
+    ServicoLogado,
+    ProdutoLogado
+    
   },
   data: () => {
     return {
@@ -273,12 +294,17 @@ export default {
       password: "",
       user: null,
       users: [],
-      nomeUser: "Maria M"
+      nomeUser: "Maria M",
+      cart:[], 
+      
     };
   },
-  props: {},
+  props: {
+    
+  },
   computed: {},
   methods: {
+
     login() {
       if (this.email && this.password) {
         var url = "/users/filter?email=" + this.email;
@@ -296,7 +322,7 @@ export default {
       } else {
         alert("Preencha os campos");
       }
-      // this.isLogged = true;
+       this.isLogged = true;
     },
     logout() {
       this.isLogged = false;

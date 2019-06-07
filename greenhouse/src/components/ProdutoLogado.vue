@@ -42,7 +42,7 @@
             </div>
             <div class="col-lg-9">
                 
-                    <Produto :items="items"/>
+                    <Produto :items="items" :CarrinhoItems="carrinho"/>
                 
             </div>
         </div>
@@ -53,16 +53,23 @@
 import Produto from "./Produto.vue"
 import http from "../http-common";
 
-class ProdutoItem{
-    constructor(src, text){
-        this.src = src;
-        this.text = text
-    }
+class Item {
+  constructor(nome, preco, srcPhoto, qtd, id, text) {
+    this.nome = nome;
+    this.preco = preco;
+    this.text= text;
+    this.srcPhoto = srcPhoto;
+    this.qtd = qtd;
+    this.id = id
+  }
 }
 export default {
     name: "ProdutoLogado",
     components: {
         Produto
+    },
+    props:{
+        carrinho: Array
     },
     data:() => {
         return{
@@ -81,7 +88,11 @@ export default {
           .get("/produtos")
           .then(response => {
             for(var i = 0; i<response.data.length ; i++){
-             this.items.push(new ProdutoItem(response.data[i].srcPhoto, response.data[i].name)) 
+             this.items.push({nome: response.data[i].name,
+                text: response.data[i].description,
+                src: response.data[i].srcPhoto,
+                preco: response.data[i].preco,
+                qtd: 1}) 
 
             }
             

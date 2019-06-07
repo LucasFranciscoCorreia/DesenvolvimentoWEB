@@ -1,21 +1,41 @@
 <template>
   <div class="row">
-    <div class="col-lg-4 col-md-4 col-sm-4" v-for="item in items" :key="item">
-      <div class="card mb-2">
+    <div class="col-lg-1 col-md-1 col-sm-1"></div>
+    <div class="card mx-auto text-center col-lg-3 col-md-3 col-sm-3" v-for="item in items" :key="item" 
+    style="">
         <img class="card-img-top" :src="item.src" alt="Card image cap">
         <div class="card-body">
-          <p class="card-text">{{item.text}}</p>
+          <h5 class="card-title">{{item.nome}}</h5>
+              <p class="card-text">{{item.text}}</p>
+              <h5 class="card-title">R$ {{item.preco}}</h5>
+          <button class="btn btn-md btn-dark" v-on:click="addItem(item)">Adicionar ao Carrinho</button>
         </div>
-      </div>
     </div>
+    <div class="col-lg-1 col-md-1 col-sm-1"></div>
   </div>
 </template>
 
 <script>
+class Item {
+  constructor(nome, preco, srcPhoto, qtd, id) {
+    this.nome = nome;
+    this.preco = preco;
+    this.srcPhoto = srcPhoto;
+    this.qtd = qtd;
+    this.id = id
+  }
+}
 export default {
   name: "Produto",
   props: {
-    items: Array
+    items: Array,
+    CarrinhoItems: Array
+  },
+  methods:{
+    addItem(item){
+      this.CarrinhoItems.push(new Item( item.nome, item.preco, item.src, 1, item.id))
+
+    }
   }
 };
 </script>

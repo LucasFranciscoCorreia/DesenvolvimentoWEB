@@ -23,11 +23,15 @@ public class UsuarioController{
         return this.service.read(id);
     }
 
-    @GetMapping(value="/users/email/{email}")
+    /*@GetMapping(value="/users/email/{email}")
     public List<Usuario> filterBy(@PathVariable String email) {
         return this.service.filterBy(email);
     }
-
+    */
+   @GetMapping(path="/users/filter")
+    public List<Usuario> filterBy(@RequestParam String email) {
+      return this.service.filterBy(email);
+    }
     @PostMapping(value = "/adduser")
     public void addUser(@RequestBody Usuario user) throws Exception{
         List<Usuario> users = this.users();

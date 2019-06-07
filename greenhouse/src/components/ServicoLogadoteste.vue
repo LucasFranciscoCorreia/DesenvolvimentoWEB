@@ -1,3 +1,4 @@
+
 <template>
   <main>
     <div class="row py-4" style="background-color:#63CF67">
@@ -14,8 +15,9 @@
         <img class="image" src="assets/naturehands.png" alt="naturehands" width="100px">
       </div>
     </div>
+   <Servico :items="items" :CarrinhoItems="carrinho" :parentfunction="addItem" style="margin-top: 20px; margin-bottom:20px;" />
 
-    <Servico :items="items" :CarrinhoItems="carrinho" style="margin-top: 20px; margin-bottom:20px;" />
+
     <div class="row py-4 text-md-right" style="background-color:#FFF285">
       <p class="gray-text" style="font-size: 38px;font-weight: lighter;font-family: Lato">
         <b>Tem uma outra necessidade com que possamos ajudar?</b>
@@ -31,15 +33,16 @@
     </div>
   </main>
 </template>
-
 <script>
 import Servico from "./Servico.vue";
-
 import http from "../http-common";
 
+import CarrinhoItem from "./CarrinhoItem.vue"
+
 class Item {
-  constructor(nome, preco, srcPhoto, qtd, id) {
+  constructor(nome,text, preco, srcPhoto, qtd, id) {
     this.nome = nome;
+    this.text = text
     this.preco = preco;
     this.srcPhoto = srcPhoto;
     this.qtd = qtd;
@@ -49,22 +52,50 @@ class Item {
 export default {
   name: "ServicoLogado",
   components: {
-
-    Servico
+    Servico,
+    CarrinhoItem
   },
-  props: {
-    carrinho: Array
+  props:{
+    isLogged: Boolean,
+    parentfunction: Function,
+    
   },
   data: () => {
     return {
-        items:[]
-    };
+      items: [
+      /*{
+        title: "Abastecimento",
+        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        src: "./assets/organic.png"
+      },
+      {
+        title: "Manuntenção",
+        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        src: "./assets/maintenance.png"
+      },
+      {
+        title: "Coleta",
+        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        src: "./assets/truck.png"
+      }*/],
+
+      carrinho:Array
+      
+    
+      
+    }
   },
   methods:{
-
+    addItem(){
+      alert(this.carrinho.length)
+      this.cart.push(new Item("Serviço de Coleta de Lixo",400.00,"assets/truck.png",2 ,2))
+      this.parentfunction()
+      alert(this.cart.length)
+      this.carrinho = this.cart
+    }
   },
    mounted(){
-
+    // alert("aaa"+this.carrinho.length)
     http
           .get("/servicos")
           .then(response => {
@@ -84,9 +115,7 @@ export default {
           });
   }
 };
-
 </script>
-
 <style scoped>
 .image {
   width: 100%;
