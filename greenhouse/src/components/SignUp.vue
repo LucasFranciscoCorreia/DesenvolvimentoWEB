@@ -72,6 +72,33 @@
                 <input type="text" placeholder="Nome" v-model="nome_fantasia">
                 <input type="text" placeholder="CNPJ" v-model="CNPJ">
               </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <input type="text" placeholder="Endereco" v-model="endereco">
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <input type="password" placeholder="Complemento" v-model="password">
+                        </div>
+
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <input type="password" placeholder="Número" v-model="password">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <input type="text" placeholder="CEP" v-model="nome">
+                        </div>
+
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <input type="text" placeholder="Telefone" v-model="CPF">
+                        </div>
+                    </div>
+                    
             </form>
 
             <div class="button-set" style="text-align: center;">
