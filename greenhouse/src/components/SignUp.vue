@@ -140,7 +140,7 @@ export default {
           .then(response => {
             this.endereco = response.data.logradouro;
           })
-          .catch(error => {
+          .catch(function() {
             this.endereco = "";
             alert("Digite um CEP valido");
           });
@@ -204,13 +204,17 @@ export default {
                 email: this.email,
                 password: this.password
               });
-              await http.post("/addfisico", {
-                fk_id_usuario: id.data,
-                sexo: this.sexo,
-                cpf: this.CPF,
-                data_nascimento: d,
-                nome: this.nome
-              });
+              await http
+                .post("/addfisico", {
+                  fk_id_usuario: id.data,
+                  sexo: this.sexo,
+                  cpf: this.CPF,
+                  data_nascimento: d,
+                  nome: this.nome
+                })
+                .catch(function() {
+                  http.delete("/removeuser/" + id.data);
+                });
               await http.post("/addendereco", {
                 fk_id_usuario: id.data,
                 rua: this.endereco,
@@ -218,7 +222,7 @@ export default {
                 complemento: this.complemento,
                 cep: this.CEP
               });
-              alert("Cadastro realizado com sucesso com sucesso com id ");
+              alert("Cadastro realizado com sucesso");
             }
           }
         } else {
@@ -293,13 +297,18 @@ export default {
                   email: this.email,
                   password: this.password
                 });
-                await http.post("/addjuridico", {
-                  fk_id_usuario:  id.data,
-                  cnpj: this.CNPJ,
-                  nome: this.nome_fantasia
-                });
+                id = id.data;
+                await http
+                  .post("/addjuridico", {
+                    fk_id_usuario: id,
+                    cnpj: this.CNPJ,
+                    nome: this.nome_fantasia
+                  })
+                  .catch(function() {
+                    http.delete("/removeuser/" + id);
+                  });
                 await http.post("/addendereco", {
-                  fk_id_usuario: id.data,
+                  fk_id_usuario: id,
                   rua: this.endereco,
                   numero: this.numero,
                   complemento: this.complemento,

@@ -15,7 +15,7 @@ public class PessoaFisica {
     @Column(name = "id_usu_fisico", unique = true, nullable = false)
     private Long id_usu_fisico;
 
-    @Column(name = "fk_id_usuario", unique = true, nullable = false)
+    @JoinColumn(name="fk_id_usuario", referencedColumnName = "idusuario",nullable = false, unique = true)
     private Long fk_id_usuario;
 
     @Column(name="sexo", nullable = false)

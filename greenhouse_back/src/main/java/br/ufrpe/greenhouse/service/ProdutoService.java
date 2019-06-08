@@ -1,9 +1,7 @@
 package br.ufrpe.greenhouse.service;
 
 import br.ufrpe.greenhouse.entities.Produto;
-import br.ufrpe.greenhouse.entities.Usuario;
 import br.ufrpe.greenhouse.repositories.RepositorioProduto;
-import br.ufrpe.greenhouse.repositories.RepositorioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

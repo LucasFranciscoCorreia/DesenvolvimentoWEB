@@ -34,7 +34,11 @@ public class UsuarioService{
     return this.repositorio.findByEmail(email);
   }
 
-  public void insert(Usuario user) throws Exception{
+  public void insert(Usuario user) {
     repositorio.save(user);
+  }
+
+  public void drop(Long id){
+        repositorio.deleteById(id);
   }
 }

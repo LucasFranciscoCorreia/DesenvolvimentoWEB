@@ -1,9 +1,7 @@
 package br.ufrpe.greenhouse.controller;
 
 import br.ufrpe.greenhouse.entities.Item;
-import br.ufrpe.greenhouse.entities.Produto;
 import br.ufrpe.greenhouse.service.ItemService;
-import br.ufrpe.greenhouse.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

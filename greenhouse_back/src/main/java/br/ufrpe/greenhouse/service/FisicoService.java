@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class FisicoService {
@@ -22,18 +21,16 @@ public class FisicoService {
         return this.repo.findAll();
     }
 
-    public PessoaFisica read(Long id) throws Exception{
-        Optional<PessoaFisica> fisicos = this.repo.findById(id);
-        if(!fisicos.isPresent()){
-            throw new Exception("Pessoa Fisica não encontrada");
+    public PessoaFisica read(Long id) {
+        List<PessoaFisica> list = this.getAllFisicos();
+        for(PessoaFisica pf : list){
+            if(pf.getFk_id_usuario().longValue() == id.longValue()){
+                return pf;
+            }
         }
-
-        return fisicos.get();
+        return null;
     }
 
-    public PessoaFisica filterBy(String cpf){
-        return repo.findByCpf(cpf);
-    }
     public void insert(PessoaFisica pf){
         this.repo.save(pf);
     }

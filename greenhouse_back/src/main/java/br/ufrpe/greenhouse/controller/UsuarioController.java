@@ -29,11 +29,17 @@ public class UsuarioController{
     }
 
     @PostMapping(value = "/adduser")
-    public void addUser(@RequestBody Usuario user) throws Exception{
+    public Long addUser(@RequestBody Usuario user) throws Exception{
         List<Usuario> users = this.users();
         if(!users.contains(user))
             this.service.insert(user);
         else
             throw new Exception("Usuario ja cadastrado");
+        return user.getIdusuario();
+    }
+
+    @DeleteMapping(value="/removeuser/{id}")
+    public void removeUser(@PathVariable Long id){
+        this.service.drop(id);
     }
 }

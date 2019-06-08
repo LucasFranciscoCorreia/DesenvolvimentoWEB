@@ -1,7 +1,6 @@
 package br.ufrpe.greenhouse.controller;
 
 import br.ufrpe.greenhouse.entities.Endereco;
-import br.ufrpe.greenhouse.entities.PessoaFisica;
 import br.ufrpe.greenhouse.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

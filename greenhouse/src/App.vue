@@ -8,7 +8,7 @@
               <a :class="['nav-link',{disabled: selected == tab}]" @click="selected = tab">{{tab}}</a>
             </li>
           </div>
-          <li v-if="user != undefined" class="nav-item dropdown">
+          <li v-if="user.email != undefined" class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
               id="navbarDropdownMenuLink-4"
@@ -17,7 +17,7 @@
               aria-expanded="false"
             >
               <i class="fas fa-user"></i>
-              {{user.nome}}
+              {{pessoa.nome}}
             </a>
             <div
               class="dropdown-menu dropdown-menu-right dropdown-info"
@@ -25,8 +25,8 @@
             >
               <a class="dropdown-item" @click="selected='MinhaConta'">Minha conta</a>
               <a class="dropdown-item" @click="selected='Carrinho'">Carrinho</a>
-              <a class="dropdown-item" @click="selected='ServicoLogado'">servico</a>
-              <a class="dropdown-item" @click="selected='ProdutoLogado'">produto</a>
+              <a class="dropdown-item" @click="selected='ServicoLogado'">Servico</a>
+              <a class="dropdown-item" @click="selected='ProdutoLogado'">Produto</a>
               <a class="dropdown-item" @click="logout(); selected='Inicio'">Sair</a>
             </div>
           </li>
@@ -248,6 +248,7 @@ import BotaoSignUp from "./components/BotaoSignUp";
 
 import Inicio from "./components/Inicio.vue";
 import Sobre from "./components/Sobre.vue";
+import Editar from "./components/Editar.vue"
 import MinhaConta from "./components/MinhaConta.vue";
 import Servico from "./components/Servicos.vue";
 import Produto from "./components/Produtos.vue";
@@ -280,16 +281,22 @@ export default {
     Contato,
     Carrinho,
     ServicoLogado,
-    ProdutoLogado
+    ProdutoLogado,
+    Editar
   },
   data: () => {
     return {
       tabs: ["Inicio", "Sobre", "Servico", "Produto", "Contato"],
-      selected: "Inicio",
+      selected: "Editar",
       email: "",
       password: "",
-      user: null,
-      pessoa: null,
+      user: {
+        email: undefined,
+        password: undefined
+      },
+      pessoa: {
+        nome: undefined
+      },
       cart: []
     };
   },
@@ -301,6 +308,12 @@ export default {
           if (response.data[0].password == this.password) {
             this.user = response.data[0];
             this.selected = "MinhaConta";
+            http
+              .get("/fisicos/id/" + response.data[0].idusuario)
+              .then(response => {
+                this.pessoa = response.data;
+                console.log(this.pessoa);
+              });
           } else {
             alert("email ou senha incorreta");
           }
@@ -314,6 +327,7 @@ export default {
     },
     logout() {
       this.user = undefined;
+      this.pessoa = undefined;
     }
   }
 };

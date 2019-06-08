@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RepositorioPessoaFisica extends JpaRepository<PessoaFisica, Long> {
-    PessoaFisica findByCpf(String cpf);
+
 }

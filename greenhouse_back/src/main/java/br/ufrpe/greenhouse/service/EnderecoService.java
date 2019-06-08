@@ -1,7 +1,6 @@
 package br.ufrpe.greenhouse.service;
 
 import br.ufrpe.greenhouse.entities.Endereco;
-import br.ufrpe.greenhouse.entities.PessoaFisica;
 import br.ufrpe.greenhouse.repositories.RepositorioEndereco;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,9 +28,6 @@ public class EnderecoService {
         return fisicos.get();
     }
 
-//    public Endereco filterBy(String cpf){
-//        return repo.findByCpf(cpf);
-//    }
 
     public void insert(Endereco end){
         this.repo.save(end);
