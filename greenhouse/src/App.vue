@@ -24,6 +24,7 @@
               aria-labelledby="navbarDropdownMenuLink-4"
             >
               <a class="dropdown-item" @click="selected='MinhaConta'">Minha conta</a>
+              <a class="dropdown-item" @click="selected='Editar'">Editar</a>
               <a class="dropdown-item" @click="selected='Carrinho'">Carrinho</a>
               <a class="dropdown-item" @click="selected='ServicoLogado'">Servico</a>
               <a class="dropdown-item" @click="selected='ProdutoLogado'">Produto</a>
@@ -117,10 +118,17 @@
         </ul>
       </div>
     </nav>
-    <component :is="selected" :isLogged="user != undefined" :carrinho="cart"></component>
+    <component
+      :is="selected"
+      :isLogged="user.email != undefined"
+      :user="user"
+      :pessoa="pessoa"
+      :endereco="endereco"
+      :carrinho="cart"
+    ></component>
     <!-- <router-view :isLogged="isLogged" :key="isLogged"></router-view> -->
     <div
-      v-if="user == undefined"
+      v-if="user.email == undefined"
       id="banner_home"
       class="py-4"
       style="background-color: #0EBE57;color: white;"
@@ -248,7 +256,7 @@ import BotaoSignUp from "./components/BotaoSignUp";
 
 import Inicio from "./components/Inicio.vue";
 import Sobre from "./components/Sobre.vue";
-import Editar from "./components/Editar.vue"
+import Editar from "./components/Editar.vue";
 import MinhaConta from "./components/MinhaConta.vue";
 import Servico from "./components/Servicos.vue";
 import Produto from "./components/Produtos.vue";
@@ -287,7 +295,7 @@ export default {
   data: () => {
     return {
       tabs: ["Inicio", "Sobre", "Servico", "Produto", "Contato"],
-      selected: "Editar",
+      selected: "Inicio",
       email: "",
       password: "",
       user: {
@@ -297,32 +305,37 @@ export default {
       pessoa: {
         nome: undefined
       },
+      endereco: undefined,
       cart: []
     };
   },
   methods: {
     async login() {
       if (this.email && this.password) {
-        var url = "/users/filter?email=" + this.email;
-        await http.get(url).then(response => {
-          if (response.data[0].password == this.password) {
-            this.user = response.data[0];
-            this.selected = "MinhaConta";
-            http
-              .get("/fisicos/id/" + response.data[0].idusuario)
-              .then(response => {
-                this.pessoa = response.data;
-                console.log(this.pessoa);
-              });
-          } else {
-            alert("email ou senha incorreta");
-          }
-          if (this.user == undefined) {
-            alert("usuario não cadastrado");
-          }
-        });
-      } else {
-        alert("Preencha os campos");
+        let id = await http.get("/users/filter?email=" + this.email);
+        id = id.data[0];
+        if (id.password == this.password) {
+          this.user = id;
+          this.selected = "MinhaConta";
+          await http
+            .get("/fisicos/id/" + id.idusuario)
+            .then(response => {
+              this.pessoa = response.data;
+            }); 
+          await http
+            .get("/enderecos/id/" + id.idusuario)
+            .then(response => {
+              this.endereco = response.data;
+            });
+          console.log(this.user);
+          console.log(this.pessoa);
+          console.log(this.endereco);
+        } else {
+          alert("email ou senha incorreta");
+        }
+        if (this.user == undefined) {
+          alert("usuario não cadastrado");
+        }
       }
     },
     logout() {

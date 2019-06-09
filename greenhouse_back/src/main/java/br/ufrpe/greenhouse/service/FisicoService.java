@@ -22,7 +22,7 @@ public class FisicoService {
     }
 
     public PessoaFisica read(Long id) {
-        List<PessoaFisica> list = this.getAllFisicos();
+4        List<PessoaFisica> list = this.getAllFisicos();
         for(PessoaFisica pf : list){
             if(pf.getFk_id_usuario().longValue() == id.longValue()){
                 return pf;

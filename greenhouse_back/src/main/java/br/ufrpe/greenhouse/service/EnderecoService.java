@@ -19,13 +19,14 @@ public class EnderecoService {
         return this.repo.findAll();
     }
 
-    public Endereco read(Long id) throws Exception{
-        Optional<Endereco> fisicos = this.repo.findById(id);
-        if(!fisicos.isPresent()){
-            throw new Exception("Pessoa Fisica não encontrada");
+    public Endereco read(Long id) {
+        List<Endereco> list = this.getAllEnderecos();
+        for(Endereco end : list){
+            if(end.getFk_id_usuario().longValue() == id.longValue()){
+                return end;
+            }
         }
-
-        return fisicos.get();
+        return null;
     }
 
 
