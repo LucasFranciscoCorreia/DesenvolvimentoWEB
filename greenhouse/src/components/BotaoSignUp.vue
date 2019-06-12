@@ -6,6 +6,7 @@
 	
 </template>
 <script>
+
 	import SignUp from './SignUp.vue'
 	export default {
 		name: "BotaoSignUp",
@@ -13,7 +14,7 @@
 			SignUp,
 		},
 		props:{
-			isLogged: Boolean
+			isLogged: Boolean,
 		}
 	};
 </script>

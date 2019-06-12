@@ -29,4 +29,12 @@ public class PessoaFisica {
 
     @Column(name="nome",length = 50, nullable = false)
     private String nome;
+
+  public Long getFk_id_usuario() {
+    return fk_id_usuario;
+  }
+
+  public void setFk_id_usuario(Long fk_id_usuario) {
+    this.fk_id_usuario = fk_id_usuario;
+  }
 }

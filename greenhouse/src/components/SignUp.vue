@@ -77,7 +77,7 @@
                   <input type="text" placeholder="CEP" v-model="CEP" @keyup="findAddress()">
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-12">
-                  <input type="text" placeholder="Endereco" v-model="endereco" disabled>
+                  <input type="text" placeholder="Endereco" v-model="endereco">
                 </div>
               </div>
               <div class="row">
@@ -185,15 +185,16 @@ export default {
           } else if (this.numero < 1) {
             alert("Informe um numero valido");
           } else if (
-            this.complemento.length < 5 ||
+            this.complemento.length < 3 ||
             this.complemento.length > 50
           ) {
-            if (this.complemento.length < 5) {
+            if (this.complemento.length < 3) {
               alert("Complemento muito pequeno");
             } else {
               alert("Complemento muito longo");
             }
           } else {
+            var erro = false;
             let d = this.data_nascimento.split("-");
             if (d[0].length != 2 || d[1].length != 2 || d[2].length != 4) {
               alert("Insira uma data valida");
@@ -214,6 +215,8 @@ export default {
                 })
                 .catch(function() {
                   http.delete("/removeuser/" + id.data);
+                  erro = true
+                  //alert("ERRO");
                 });
               await http.post("/addendereco", {
                 fk_id_usuario: id.data,
@@ -221,8 +224,14 @@ export default {
                 numero: this.numero,
                 complemento: this.complemento,
                 cep: this.CEP
+              }).then(response=>{
+                if(!erro){
+                  alert("Cadastro realizado com sucesso");
+                  this.selected = "MinhaConta";
+                }
+                
               });
-              alert("Cadastro realizado com sucesso");
+              
             }
           }
         } else {

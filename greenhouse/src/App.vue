@@ -339,8 +339,17 @@ export default {
       }
     },
     logout() {
-      this.user = undefined;
-      this.pessoa = undefined;
+      
+    this.selected = "Inicio";
+      this.user={
+        email: undefined,
+        password: undefined
+      }
+      this.pessoa = {
+        nome: undefined
+      }
+
+    
     }
   }
 };
