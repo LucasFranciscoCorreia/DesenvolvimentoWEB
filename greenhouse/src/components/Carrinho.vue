@@ -52,28 +52,38 @@
             </div><hr class="my-4">
             <div class="row">
                     <div class="row">
-                        <div class="col-sm-10 col-md-10 col-lg-10">
-                            <input type="text" placeholder="Número do Cartão" v-model="email">
+                        <div class="col-sm-10 col-md-10 col-lg-10 ">
+                          
+                            <input id="cartao" type="text" placeholder="XXXX XXXX XXXX XXXX" v-model="cartao">
+                            <label for="cartao" style="color: #949494;"> Numero do cartao</label>
                         </div>
 
                     </div>
                     <div class="row">
                         <div class="col-sm-6 col-md-6 col-lg-6">
-                            <input type="password" placeholder="Data de Vencimento" v-model="password">
+                          
+                            <input type="text" placeholder="MM/AA" v-model="vencimento">
+                            <label for="cartao" style="color:#949494;">Data de Vencimento</label>
                         </div>
 
                         <div class="col-sm-6 col-md-6 col-lg-6">
-                            <input type="password" placeholder="Código de Segurança" v-model="password">
+                            <input type="text" placeholder="3 ou 4 dígitos" v-model="codSeguranca">
+                            <label for="cartao" style="color:#949494;">Código de Segurança</label>
+
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-6 col-md-6 col-lg-6">
-                            <input type="text" placeholder="Nome" v-model="nome">
+                          
+                            <input type="text" placeholder="Como consta no cartão" v-model="nome">
+                            <label for="cartao" style="color:#949494;">Nome</label>
                         </div>
 
                         <div class="col-sm-6 col-md-6 col-lg-6">
-                            <input type="text" placeholder="Sobrenome   " v-model="CPF">
+                          
+                            <input type="text" placeholder="Como consta no cartão" v-model="sobrenome">
+                            <label for="cartao" style="color:#949494;">Sobrenome</label>
                         </div>
                     </div>
                     
@@ -91,6 +101,7 @@
 
 <script>
 import CarrinhoItem from "./CarrinhoItem.vue"
+import http from "../http-common";
 
 class Item {
   constructor(nome, preco, srcPhoto, qtd, id) {
@@ -113,6 +124,12 @@ export default {
   },
   data: () => {
     return {
+      cartao:"",
+      vencimento: "",
+      codSeguranca:"",
+      nome: "",
+      sobrenome: ""
+
     };
   },
   methods:{
@@ -123,7 +140,61 @@ export default {
       }
       this.total = valor
     },
+    verificaCampos(){
+      if (
+          this.cartao &&
+          this.vencimento &&
+          this.codSeguranca &&
+          this.nome &&
+          this.sobrenome 
+        ) {
+          if (this.cartao.length <16 || this.cartao.length > 19) {
+            alert("Número de Cartão inválido")
+            return false;
+          } else if (this.vencimento.length != 5) { // mes-ano
+            alert("Informe uma data valida");
+            return false;
+          } else if (this.nome.length < 2 || this.nome.length > 30) {
+            if (this.nome.length < 2) {
+              alert("Nome muito curto\n R U a robot?");
+            } else {
+              alert("Nome muito longo");
+            }
+            return false;
+          } else if (this.sobrenome.length < 2 || this.sobrenome.length > 30) {
+            if (this.sobrenome.length < 2) {
+              alert("Sobrenome muito curto\n R U a robot?");
+            } else {
+              alert("Sobrenome muito longo");
+
+            }
+            return false;
+          }
+           else if (this.codSeguranca.length < 3 || this.codSeguranca.length > 4) { // 3 ou 4 digitos
+            alert("Código inválido");
+            return false;
+
+          } else {
+            return true;
+          }
+        } else {
+          alert("Preencha todos os campos corretamente");
+          return false;
+        }
+    }
+    ,
     comprar(){
+      if(this.verificaCampos()){
+
+
+            var erro = false;
+            let d = this.vencimento.split("-");
+            if (d[0].length != 2 || d[1].length != 2) {
+              alert("Insira uma data valida");
+            } else {
+              
+            }
+      }
 
       
     }
