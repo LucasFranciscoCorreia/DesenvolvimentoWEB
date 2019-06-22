@@ -1,5 +1,6 @@
 package br.ufrpe.greenhouse.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -24,6 +25,7 @@ public class PessoaFisica {
     @Column(name="cpf", unique = true, length = 11, nullable = false)
     private String cpf;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @Column(name="data_nascimento", nullable = false)
     private Date data_nascimento;
 

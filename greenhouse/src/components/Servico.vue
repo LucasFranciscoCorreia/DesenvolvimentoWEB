@@ -18,13 +18,16 @@
 </template>
 
 <script>
-class Item {
+class ItemPedido {
   constructor(nome, preco, srcPhoto, qtd, id) {
-    this.nome = nome;
-    this.preco = preco;
-    this.srcPhoto = srcPhoto;
+    this.item={
+      name: nome,
+      preco : preco,
+      srcPhoto : srcPhoto,
+      id : id
+    }
     this.qtd = qtd;
-    this.id = id
+   
   }
 }
 export default {
@@ -40,7 +43,7 @@ export default {
   },
   methods:{
     addItem(item){
-      this.CarrinhoItems.push(new Item( item.nome, item.preco, item.src, 1, item.id))
+      this.CarrinhoItems.push(new ItemPedido( item.nome, item.preco, item.src, 1, item.id))
 
     }
   }

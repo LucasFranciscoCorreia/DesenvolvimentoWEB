@@ -103,15 +103,32 @@
 import CarrinhoItem from "./CarrinhoItem.vue"
 import http from "../http-common";
 
+ 
+
+ class ItemPedido {
+   constructor(item, quantidade) {
+    this.item = item;
+    this.qtd = quantidade;  
+  }
+}
+
+ class Pedido {
+   constructor(usuario, itensPedido) {
+    this.userEmail = usuario;
+    this.productOrders = itensPedido; //vetor de itemPedido //carrinho
+  }
+}
+
 class Item {
   constructor(nome, preco, srcPhoto, qtd, id) {
-    this.nome = nome;
+    this.name = nome;
     this.preco = preco;
     this.srcPhoto = srcPhoto;
-    this.qtd = qtd;
+    //this.qtd = qtd;
     this.id = id
   }
 }
+
 export default {
   name: "Carrinho",
   components: {
@@ -120,7 +137,8 @@ export default {
   props: {
     isLogged: Boolean,
     total:Number,
-    carrinho: Array
+    carrinho: Array,
+    user: Object
   },
   data: () => {
     return {
@@ -136,7 +154,7 @@ export default {
     calcular(){
       var valor = 0
        for(var i=0; i< this.carrinho.length;i++){
-          valor = valor + (this.carrinho[i].preco * this.carrinho[i].qtd)
+          valor = valor + (this.carrinho[i].item.preco * this.carrinho[i].qtd)
       }
       this.total = valor
     },
@@ -184,17 +202,30 @@ export default {
     }
     ,
     comprar(){
+      
       if(this.verificaCampos()){
 
 
-            var erro = false;
+           /* var erro = false;
             let d = this.vencimento.split("-");
             if (d[0].length != 2 || d[1].length != 2) {
               alert("Insira uma data valida");
-            } else {
-              
+            } else {*/
+              var pedido = new Pedido(this.user.email, this.carrinho);
+               http 
+                .post("/pedido", 
+                  pedido
+                )
+                .then(response => {
+                  this.carrinho = []
+                  alert("Compra Realizada com Sucesso!")
+                })
+                .catch(function() {
+                  erro = true
+                  //alert("ERRO");
+                });
             }
-      }
+     // }
 
       
     }
@@ -202,7 +233,7 @@ export default {
    mounted(){
        this.total = 0
       for(var i=0; i< this.carrinho.length;i++){
-          this.total = this.total + (this.carrinho[i].preco * this.carrinho[i].qtd)
+          this.total = this.total + (this.carrinho[i].item.preco * this.carrinho[i].qtd)
       }
   }
 };

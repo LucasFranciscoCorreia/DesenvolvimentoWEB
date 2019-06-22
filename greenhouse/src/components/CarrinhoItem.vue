@@ -7,11 +7,11 @@
                   <div class="row">
 
                 <div class="col-sm-3 col-md-3 col-lg-3">
-                   <img :src="item.srcPhoto" height="58" style=" margin:auto;">
+                   <img :src="item.item.srcPhoto" height="58" style=" margin:auto;">
                 </div>
                 <div class="col-sm-9 col-md-9 col-lg-9">
                    <h4>
-                    <strong>{{item.nome}}</strong>
+                    <strong>{{item.item.nome}}</strong>
                   </h4>
                 </div>
                   </div>
@@ -20,7 +20,7 @@
                    Qtd. <input v-model="item.qtd" style="width: 40px;"/>
                 </div>
                 <div class="col-sm-2 col-md-2 col-lg-2">
-                <h4>R$ {{item.preco * item.qtd}}</h4>
+                <h4>R$ {{item.item.preco * item.qtd}}</h4>
               </div>
               
             </div>

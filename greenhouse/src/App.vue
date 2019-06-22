@@ -300,7 +300,8 @@ export default {
       password: "",
       user: {
         email: undefined,
-        password: undefined
+        password: undefined, 
+        
       },
       pessoa: {
         nome: undefined

@@ -1,5 +1,6 @@
 package br.ufrpe.greenhouse.service;
 
+import br.ufrpe.greenhouse.entities.Pedido;
 import br.ufrpe.greenhouse.entities.Usuario;
 import br.ufrpe.greenhouse.repositories.RepositorioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,16 @@ public class UsuarioService{
 
   public void drop(Long id){
         repositorio.deleteById(id);
+  }
+
+
+
+  public List<Pedido> readHistorico(String email) throws Exception {
+    List<Usuario> user = this.repositorio.findByEmail(email);
+    if (user.get(0).equals(null)) {
+      throw new Exception("Usuario não encontrado");
+    }
+
+    return user.get(0).getHistorico();
   }
 }

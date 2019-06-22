@@ -1,5 +1,6 @@
 package br.ufrpe.greenhouse.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -28,6 +29,9 @@ public class Usuario{
 
   /*@Column(name = "carrinho")
   private List<Item> carrinho;*/
+
+  @OneToMany(cascade = CascadeType.ALL, mappedBy="usuario")
+  private List<Pedido> historico;
 
     public Usuario(){
 
@@ -73,6 +77,14 @@ public class Usuario{
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public List<Pedido> getHistorico() {
+    return historico;
+  }
+
+  public void setHistorico(List<Pedido> historico) {
+    this.historico = historico;
   }
 
   @Override

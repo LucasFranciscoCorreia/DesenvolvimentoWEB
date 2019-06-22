@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ItemService{
@@ -23,4 +24,13 @@ public class ItemService{
   public void insert(Item item) throws Exception{
     repositorio.save(item);
   }
+
+  public List<Item> getAllByTipo(int tipo){
+    return this.repositorio.findByTipo(tipo);
+  }
+
+  public Item getById(Long id){
+    return this.repositorio.findById(id).orElseThrow();
+  }
+
 }

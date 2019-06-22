@@ -41,14 +41,14 @@
     </div>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-6 col-md-6 col-lg-6">
-          <div style="background-color: white; border-radius: 1rem; padding: 20px; margin: 20px;">
+        <div class="col-sm-6 col-md-6 col-lg-6" >
+          <div style="background-color: white; border-radius: 1rem; padding: 20px; margin: 20px;" >
             <div class="row">
               <h1 style=" margin:auto;">
                 <strong>Histórico</strong>
               </h1>
             </div>
-            <Historico :historicoItems="items"/>
+            <Historico :historicoItems="items" id="historico"/>
 
             
 
@@ -105,12 +105,14 @@
 
 <script>
 import Historico from "./Historico.vue"
+import http from "../http-common";
 
 class HistoricolItem {
-  constructor(nome, data, srcPhoto) {
+  constructor(nome, data, srcPhoto,qtd) {
     this.nome = nome;
     this.data = data;
     this.srcPhoto = srcPhoto;
+    this.qtd = qtd
   }
 }
 export default {
@@ -119,30 +121,34 @@ export default {
     Historico
   },
   props: {
-    isLogged: Boolean
+    isLogged: Boolean,
+    user:Object
       },
   data: () => {
     return {
-      items: [new HistoricolItem("Serviço de Coleta de Lixo","11/02/2019","assets/truck.png"),
-      new HistoricolItem("Serviço de Coleta de Lixo","11/02/2019","assets/truck.png"),
-      new HistoricolItem("Serviço de Coleta de Lixo","11/02/2019","assets/truck.png"),
-      new HistoricolItem("Serviço de Coleta de Lixo","11/02/2019","assets/truck.png"),
-      new HistoricolItem("Serviço de Coleta de Lixo","11/02/2019","assets/truck.png")]
+      items: []
     };
   },
    mounted(){
-     /* FAZER ISSO APÓS IMPLEMENTAR O HISTORICO NO BANCO
+     let url = "/users/"+ this.user.email +"/historico"
     http
-          .get("/users")
+          .get(url)
           .then(response => {
-            for(var i = 0; i<response.data.length ; i++){
-             this.items.push(new HistoricolItem(response.data[i].name,response.data[i].date,response.data[i].srcPhoto)
+            
+            for(var i = response.data.length-1; i>=0 ; i--){
+              for(var y = 0; y<response.data[i].orderProducts.length ; y++){
+                this.items.push(new HistoricolItem(
+                response.data[i].orderProducts[y].product.name,
+                response.data[i].dateCreated,
+                response.data[i].orderProducts[y].product.srcPhoto,
+                response.data[i].orderProducts[y].quantity
+                )
                 
               )
-
+              }
             }
             
-          });*/
+          });
   }
 };
 </script>
@@ -178,5 +184,9 @@ export default {
   border-radius: 50px;
   padding: 10px;
   margin: 10px;
+}
+#historico{
+  overflow: auto;
+  height: 600px;
 }
 </style>

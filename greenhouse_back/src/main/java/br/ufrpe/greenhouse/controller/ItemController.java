@@ -28,5 +28,24 @@ public class ItemController{
     else
       throw new Exception("Item ja cadastrado");
   }
+/*
+  @GetMapping(path="/produtos")
+  public List<Item> produtos() {
+    return service.getAllByTipo(1);
+  }
 
+  @GetMapping(path="/itens/servicos")
+  public List<Item> servicos() {
+    return service.getAllByTipo(2);
+  }
+
+  @PostMapping(value = "/produto")
+  public void addProduto(@RequestBody Item produto) throws Exception{
+    List<Item> produtos = this.produtos();
+    produto.setTipo(1);
+    if(!produtos.contains(produto))
+      this.service.insert(produto);
+    else
+      throw new Exception("Produto ja cadastrado");
+  }*/
 }

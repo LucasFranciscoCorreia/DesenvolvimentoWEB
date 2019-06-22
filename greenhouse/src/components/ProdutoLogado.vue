@@ -92,7 +92,8 @@ export default {
                 text: response.data[i].description,
                 src: response.data[i].srcPhoto,
                 preco: response.data[i].preco,
-                qtd: 1}) 
+                qtd: 1,
+                id: response.data[i].id}) 
 
             }
             

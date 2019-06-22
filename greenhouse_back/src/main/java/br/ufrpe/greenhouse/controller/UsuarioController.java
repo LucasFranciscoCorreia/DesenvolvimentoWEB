@@ -1,5 +1,6 @@
 package br.ufrpe.greenhouse.controller;
 
+import br.ufrpe.greenhouse.entities.Pedido;
 import br.ufrpe.greenhouse.entities.Usuario;
 import br.ufrpe.greenhouse.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,4 +44,10 @@ public class UsuarioController {
     public void removeUser(@PathVariable Long id) {
         this.service.drop(id);
     }
+
+
+  @GetMapping(value = "/users/{email}/historico")
+  public List<Pedido> readHistorico(@PathVariable String email) throws Exception {
+    return this.service.readHistorico(email);
+  }
 }
