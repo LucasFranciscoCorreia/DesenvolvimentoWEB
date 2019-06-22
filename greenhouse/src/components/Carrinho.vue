@@ -221,7 +221,6 @@ export default {
                   alert("Compra Realizada com Sucesso!")
                 })
                 .catch(function() {
-                  erro = true
                   //alert("ERRO");
                 });
             }

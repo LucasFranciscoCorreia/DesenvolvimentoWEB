@@ -11,7 +11,8 @@ export default {
   name: "NaviItem",
   props: {
     isLogged: Boolean,
-    tab: String
+    tab: String,
+    
   }
 };
 </script>

@@ -6,6 +6,7 @@ import br.ufrpe.greenhouse.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -33,9 +34,10 @@ public class UsuarioController {
     @PostMapping(value = "/adduser")
     public Long addUser(@RequestBody Usuario user) throws Exception {
         List<Usuario> users = this.users();
-        if (!users.contains(user))
-            this.service.insert(user);
-        else
+        if (!users.contains(user)){
+          user.setHistorico(new ArrayList<Pedido>());
+          this.service.insert(user);
+        }else
             throw new Exception("Usuario ja cadastrado");
         return user.getIdusuario();
     }

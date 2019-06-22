@@ -34,7 +34,9 @@ public class Pedido {
   @Valid
   private List<ItemPedido> orderProducts = new ArrayList<>();
 
-
+  public Pedido() {
+  }
+/*
   @Transient
   public Double getTotalOrderPrice() {
     double sum = 0D;
@@ -45,7 +47,7 @@ public class Pedido {
 
     return sum;
   }
-
+*/
   public Long getId() {
     return id;
   }

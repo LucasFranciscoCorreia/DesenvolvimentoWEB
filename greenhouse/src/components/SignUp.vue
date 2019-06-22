@@ -195,16 +195,19 @@ export default {
             }
           } else {
             var erro = false;
-            let d = this.data_nascimento.split("-");
+            let d = this.data_nascimento.split("/");
             if (d[0].length != 2 || d[1].length != 2 || d[2].length != 4) {
               alert("Insira uma data valida");
             } else {
-              d = d[2] + "-" + d[1] + "-" + d[0];
+              d = d[2] + "/" + d[1] + "/" + d[0];
               let id = await http.post("/adduser", {
                 tpusuario: this.selected,
                 email: this.email,
                 password: this.password
-              });
+              }).catch(function() {
+                  erro = true
+                  alert("ERRO 1");
+                });
               await http
                 .post("/addfisico", {
                   fk_id_usuario: id.data,
@@ -216,7 +219,7 @@ export default {
                 .catch(function() {
                   http.delete("/removeuser/" + id.data);
                   erro = true
-                  //alert("ERRO");
+                  alert("ERRO");
                 });
               await http.post("/addendereco", {
                 fk_id_usuario: id.data,

@@ -1,10 +1,12 @@
 package br.ufrpe.greenhouse.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,11 +29,9 @@ public class Usuario{
     @Column(name = "password")
     private String password;
 
-  /*@Column(name = "carrinho")
-  private List<Item> carrinho;*/
-
   @OneToMany(cascade = CascadeType.ALL, mappedBy="usuario")
-  private List<Pedido> historico;
+  @JsonIgnore
+  private List<Pedido> historico = new ArrayList<>();
 
     public Usuario(){
 
