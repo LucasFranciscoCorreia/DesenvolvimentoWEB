@@ -6,6 +6,7 @@
       </div>
       <div class="container col-lg-7 mr-auto exp">
         <img src="assets/about.png" alt="about" height="150px">
+        <img src="assets/about1.png" height="150px">
         <p class="white-text" style="font-size: 60px;font-weight: bold;font-family: Lato">
           <b>
             Uma questão de
