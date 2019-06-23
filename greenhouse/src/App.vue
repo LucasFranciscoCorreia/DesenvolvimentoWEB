@@ -316,6 +316,7 @@ export default {
         if (id.password == this.password) {
           this.user = id;
           this.selected = "MinhaConta";
+          
           await http
             .get("/fisicos/id/" + id.idusuario)
             .then(response => {
@@ -347,6 +348,8 @@ export default {
       this.pessoa = {
         nome: undefined
       }
+
+      this.cart=[]
 
     
     }
