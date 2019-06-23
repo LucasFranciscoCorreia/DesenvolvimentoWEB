@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-light mr-auto">
-      <div class="collapse navbar-collapse ml-auto" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
+    
+    <nav class="navbar navbar-expand-lg navbar-light mr-auto " id="navbarNav">
+      <div class="collapse navbar-collapse ml-auto"  >
+        <ul class="navbar-nav ml-auto" >
           <div v-for="tab in tabs" :key="tab">
             <li :class="['nav-item',{active: selected == tab}]">
               <a :class="['nav-link',{disabled: selected == tab}]" @click="selected = tab">{{tab}}</a>
@@ -45,7 +46,7 @@
             >
               <!-- Material form login -->
               <div class="card">
-                <h5 class="card-header info-color white-text text-center py-4">
+              <h5 class="card-header  white-text text-center py-4" style="background-color:var(--main-color);" >
                   <strong>Sign in</strong>
                 </h5>
 
@@ -79,7 +80,7 @@
                             type="checkbox"
                             class="form-check-input"
                             id="materialLoginFormRemember"
-                          >
+                            >
                           <label
                             class="form-check-label"
                             for="materialLoginFormRemember"
@@ -94,9 +95,9 @@
 
                     <!-- Sign in button -->
                     <button
-                      class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0"
+                      class="btn btn-outline-green btn-rounded btn-block my-4 waves-effect z-depth-0"
                       type="submit"
-                      style="border-radius: 2rem"
+                      style="border-radius: 2rem;"
                     >
                       <a @click="login()">Sign in</a>
                     </button>
@@ -104,7 +105,7 @@
                     <!-- Register -->
                     <p>
                       Not a member?
-                      <a>Register</a>
+                      <a @click="$modal.show('demo-login')" >Register</a><SignUp/>
                     </p>
                   </form>
                   <!-- Form -->
@@ -123,13 +124,13 @@
       :pessoa="pessoa"
       :endereco="endereco"
       :carrinho="cart"
-    ></component>
+      style="margin-top:50px;"></component>
     <!-- <router-view :isLogged="isLogged" :key="isLogged"></router-view> -->
     <div
       v-if="user.email == undefined"
       id="banner_home"
       class="py-4"
-      style="background-color: #0EBE57;color: white;"
+      style="background-color: var(--main-color);color: white;"
     >
       <div class="container">
         <div class="row" style="margin:auto;">
@@ -248,6 +249,7 @@
   </div>
 </template>
 
+
 <script>
 import NaviItem from "./components/NavItem";
 import BotaoSignUp from "./components/BotaoSignUp";
@@ -264,6 +266,7 @@ import ServicoLogado from "./components/ServicoLogado.vue";
 import ProdutoLogado from "./components/ProdutoLogado.vue";
 
 import http from "./http-common";
+
 
 class Item {
   constructor(nome, preco, srcPhoto, qtd, id) {
@@ -358,5 +361,15 @@ export default {
 </script>
 
 <style scoped>
+#navbarNav {
+  position:fixed; /* fixing the position takes it out of html flow - knows
+  /* define height for content */
+  background-color: white;
+  left:0;           /* top left corner should start at leftmost spot */
+  top:0;            /* top left corner should start at topmost spot */
+  width:100vw;      /* take up the full browser width */
+  z-index:200;  /* high z index so other content scrolls underneath */
+  height:50px; 
+}
 </style>
 

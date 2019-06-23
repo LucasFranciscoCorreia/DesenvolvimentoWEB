@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div id="banner_home" style="background-color: #0EBE57; color: white;">
+    <div id="banner_home" style="background-color: var(--main-color); color: white;">
       <div class="row">
         <div class="col-sm-6 col-md-6 col-lg-6" style="margin:auto;">
           <div class="row">

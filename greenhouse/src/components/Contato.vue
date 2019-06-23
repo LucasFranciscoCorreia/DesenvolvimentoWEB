@@ -1,8 +1,8 @@
  <template>
   <div>
     <div
-      class="col"
-      style="background-color:#6DE16A; height: 100px; width: 96%; left: 2%;"
+      
+      style="background-color:var(--main-color); height: 100px; width: 100%; left: 2%;"
       align="center"
     >
       <div class="container col-lg-8 mr-auto">

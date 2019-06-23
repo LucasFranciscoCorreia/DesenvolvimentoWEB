@@ -1,19 +1,17 @@
 <template>
   <main>
-    <div class="row py-4" style="background-color:#63CF67">
-      <div class="image col-lg-3 col-md-3 col-sm-3">
-        <img src="assets/tools.png" alt="tools" width="100px">
+<div class="row py-4" style="background-color:var(--main-color)">
+      <div class="col-lg-4 col-md-4 col-sm-4 ml-auto">
+        <img class="imageTop" src="assets/tools.png" alt="tools">
       </div>
-
       <p
-        class="exp gray-text col-lg-4 col-md-4 col-lg-4"
+        class="exp col-lg-4 col-md-4 col-sm-4 gray-text"
         style="font-size: 50px;font-weight: bold;font-family: Lato"
       >
         <b>Contrate um serviço</b>
       </p>
-
-      <div class="image col-lg-3 col-md-3 col-sm-3 text-md-right">
-        <img src="assets/naturehands.png" alt="naturehands" width="100px">
+      <div class="col-lg-4 col-md-4 col-sm-4 ml-auto">
+        <img class="imageTop" src="assets/naturehands.png" alt="naturehands" width="100px">
       </div>
     </div>
     <div class="py-5">
@@ -65,6 +63,16 @@ export default {
 </script>
 
 <style scoped>
+
+.imageTop {
+  width: 100%;
+  max-width: 7em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
 .image {
   /* width: 100%;
   max-width: 7em;

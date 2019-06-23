@@ -75,10 +75,14 @@
 </template>
 
 <script>
+import http from "../http-common";
+
 export default {
   name: "Editar",
-  data: {
+  data: () => {
+    return {
     password: ""
+    };
   },
   props: {
     user: Object,

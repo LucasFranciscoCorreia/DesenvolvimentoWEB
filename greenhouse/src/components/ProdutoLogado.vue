@@ -1,6 +1,6 @@
 <template>
 	<main>
-        <div class="py-4 row" style="background-color: #63CF67">
+        <div class="py-4 row" style="background-color: var(--main-color);">
             <div class="col-lg-2 col-md-2 col-sm-2 text-center">
                 <img src="assets/plant.png" alt="plant1">
             </div>
