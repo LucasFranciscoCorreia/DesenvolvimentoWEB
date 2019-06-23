@@ -33,4 +33,8 @@ public class ItemService{
     return this.repositorio.findById(id).orElseThrow();
   }
 
+  public void drop(Long id){
+    repositorio.deleteById(id);
+  }
+
 }

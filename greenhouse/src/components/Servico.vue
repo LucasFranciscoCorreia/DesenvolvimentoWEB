@@ -2,7 +2,7 @@
 <div>
     <div class="row">
       <div class="col-lg-1 col-md-1 col-sm-1"></div>
-    <div class="card mx-auto text-center col-lg-3 col-md-3 col-sm-3" v-for="item in items" :key="item" style="border-radius: 1rem;"
+    <div class="card mx-auto text-center col-lg-3 col-md-3 col-sm-3" v-for="item in items" :key="item" style="border-radius: 1rem; margin-top:15px;"
     :class="['servico-item', {active: selected==index}]">
         <img class="card-img-top" :src="item.src" alt="logo">
         <div class="card-body">

@@ -32,7 +32,10 @@ public class ProdutoController{
       throw new Exception("Produto ja cadastrado");
   }
 
-
+  @DeleteMapping(value = "/removeproduto/{id}")
+  public void removeProduto(@PathVariable Long id) {
+    this.service.drop(id);
+  }
  /* @Autowired
   private ProdutoService service;
 
