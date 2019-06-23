@@ -8,6 +8,7 @@
         <div class="card-body">
           <h5 class="card-title">{{item.nome}}</h5>
               <p class="card-text">{{item.text}}</p>
+              <h5 class="card-title">R$ {{item.preco}}</h5>
               <button class="btn btn-md btn-dark" v-on:click="addItem(item)">Contratar</button>
         </div>
     </div>

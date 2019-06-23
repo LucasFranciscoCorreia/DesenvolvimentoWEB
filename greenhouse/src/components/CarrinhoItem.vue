@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-sm-9 col-md-9 col-lg-9">
                    <h4>
-                    <strong>{{item.item.nome}}</strong>
+                    <strong>{{item.item.name}}</strong>
                   </h4>
                 </div>
                   </div>
