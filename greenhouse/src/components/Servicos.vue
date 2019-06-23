@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ServicoLogado v-if="isLogged" />
+    <ServicoLogado v-if="isLogged" :carrinho="carrinho"/>
     <ServicoNLogado v-else />
   </div>
 </template>
@@ -15,7 +15,8 @@ export default {
     ServicoNLogado
   },
   props: {
-    isLogged: Boolean
+    isLogged: Boolean,
+    carrinho: Array
   }
 };
 </script>

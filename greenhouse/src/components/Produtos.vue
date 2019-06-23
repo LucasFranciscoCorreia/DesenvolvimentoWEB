@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ProdutoLogado v-if="isLogged"/>
+    <ProdutoLogado v-if="isLogged" :carrinho="carrinho"/>
     <ProdutoNLogado v-else/>
   </div>
 </template>
@@ -15,7 +15,8 @@ export default {
     ProdutoNLogado
   },
   props: {
-    isLogged: Boolean
+    isLogged: Boolean,
+    carrinho: Array
   }
 };
 </script>

@@ -26,8 +26,6 @@
               <a class="dropdown-item" @click="selected='MinhaConta'">Minha conta</a>
               <a class="dropdown-item" @click="selected='Editar'">Editar</a>
               <a class="dropdown-item" @click="selected='Carrinho'">Carrinho</a>
-              <a class="dropdown-item" @click="selected='ServicoLogado'">Servico</a>
-              <a class="dropdown-item" @click="selected='ProdutoLogado'">Produto</a>
               <a class="dropdown-item" @click="logout(); selected='Inicio'">Sair</a>
             </div>
           </li>
