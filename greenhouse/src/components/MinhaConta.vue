@@ -1,6 +1,6 @@
 <template>
   <main style=" background-color: #E6E6E6;">
-    <div id="banner_home" style="background-color: #0EBE57; ">
+    <div id="banner_home" style="background-color: #0EBE57; overflow:hidden;" >
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-2 col-md-2 col-lg-2">
