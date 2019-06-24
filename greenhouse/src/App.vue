@@ -4,6 +4,9 @@
     <nav class="navbar navbar-expand-lg navbar-light mr-auto " id="navbarNav">
       <div class="collapse navbar-collapse ml-auto"  >
         <ul class="navbar-nav ml-auto" >
+          <li>
+            <img src="assets/logo1.png"/>
+          </li>
           <div v-for="tab in tabs" :key="tab">
             <li :class="['nav-item',{active: selected == tab}]">
               <a :class="['nav-link',{disabled: selected == tab}]" @click="selected = tab">{{tab}}</a>
