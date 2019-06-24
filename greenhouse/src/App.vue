@@ -2,11 +2,14 @@
   <div id="app">
     
     <nav class="navbar navbar-expand-lg navbar-light mr-auto " id="navbarNav">
+      <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/glacial-indifference" type="text/css"/>
+
       <div class="collapse navbar-collapse ml-auto"  >
+        <a class="navbar-brand" href="#" style="margin-left:150px;">
+          <img src="assets/logo1.png" alt="" style="max-height: 2.2em;">
+          </a><h3 style="color:#47525E; font-family: 'GlacialIndifferenceRegular'; margin-top:auto;">GreenHouse</h3>
         <ul class="navbar-nav ml-auto" >
-          <li>
-            <img src="assets/logo1.png"/>
-          </li>
+
           <div v-for="tab in tabs" :key="tab">
             <li :class="['nav-item',{active: selected == tab}]">
               <a :class="['nav-link',{disabled: selected == tab}]" @click="selected = tab">{{tab}}</a>

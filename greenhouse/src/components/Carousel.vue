@@ -1,7 +1,6 @@
 <template>
   <div>
-    <div v-for="(item,index) in carouselItems" :key="index" :class="['carousel-item', {active: selected==index}]" 
-    >
+    <div v-for="(item,index) in carouselItems" :key="index" :class="['carousel-item', {active: selected==index}]">
       <div class="col-sm-6 col-md-6 col-lg-6">
         <div class="card mb-2">
           <img class="image card-img-top" alt="Card image cap" :src="item.src">
@@ -33,7 +32,6 @@ export default {
 .image {
   width: 100%;
   max-width: 25em;
-  max-height: 25em;
   display: block;
   margin-left: auto;
   margin-right: auto;
