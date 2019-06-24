@@ -5,7 +5,7 @@
         <img src="assets/house.png" alt="house" width="300px">
       </div>
       <div class="col-lg-8 col-md-8 col-sm-8 mr-auto">
-        <img src="assets/our_products.png" alt="Produtos" height="100px">
+        <h1 style="color:var(--titulo);font-size:90px; font-family: Lato; font-weight:800"><b>Nossos Produtos</b></h1>
         <p class="white-text" style="font-size: 60px;font-weight: bold;font-family: Lato">
           <b>
             Sustentabilidade

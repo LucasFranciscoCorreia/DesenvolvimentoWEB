@@ -49,10 +49,10 @@
             <div
               class="dropdown-menu dropdown-menu-right dropdown-info"
               aria-labelledby="navbarDropdownMenuLink-4"
-            >
+            style="padding:0em; margin-top:5px;">
               <!-- Material form login -->
               <div class="card">
-              <h5 class="card-header  white-text text-center py-4" style="background-color:var(--main-color);" >
+              <h5 class="card-header  white-text text-center py-4" style="background-color:#067635;" >
                   <strong>Sign in</strong>
                 </h5>
 

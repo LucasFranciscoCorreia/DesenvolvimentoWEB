@@ -6,7 +6,7 @@
       </div>
       <p
         class="exp col-lg-4 col-md-4 col-sm-4 gray-text"
-        style="font-size: 50px;font-weight: bold;font-family: Lato; color:var(--titulo);"
+        style="font-size: 50px;font-weight: bold;font-family: Lato; color:white;"
       >
         <b>Contrate um serviço</b>
       </p>

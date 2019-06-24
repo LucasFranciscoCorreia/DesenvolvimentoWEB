@@ -1,12 +1,16 @@
 <template>
   <main>
     <div class="row py-4" style="background-color:var(--main-color);">
-      <div class="container col-lg-5 ml-auto">
+      <div class="container col-lg-4 ml-auto">
         <img src="assets/planet.png" alt="planet" class="image">
       </div>
-      <div class="container col-lg-7 mr-auto exp">
+      <div class="container col-lg-8 mr-auto exp" style="text-align:left;">
         <img src="assets/about.png" alt="about" height="150px">
-        <p class="white-text" style="font-size: 60px;font-weight: bold;font-family: Lato">
+ 
+        
+                
+
+        <p class="white-text" style="font-size: 70px;font-weight: bold;font-family: Lato">
           <b>
             Uma questão de
             <br>conscientização!
