@@ -90,7 +90,7 @@
                           <label
                             class="form-check-label"
                             for="materialLoginFormRemember"
-                          >Remember me</label>
+                          style="">Remember me</label>
                         </div>
                       </div>
                       <div>
@@ -376,6 +376,13 @@ export default {
   width:100vw;      /* take up the full browser width */
   z-index:200;  /* high z index so other content scrolls underneath */
   height:50px; 
+  
+}
+
+[type=checkbox]:checked+label::before {
+  border-right:2px solid  #216d32;
+  border-bottom: 2px solid  #28a745;
+  
 }
 </style>
 
