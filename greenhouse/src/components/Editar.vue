@@ -76,6 +76,7 @@
 
 <script>
 import http from "../http-common";
+import { all } from 'q';
 
 export default {
   name: "Editar",
@@ -149,6 +150,44 @@ export default {
               d = d[2] + "/" + d[1] + "/" + d[0];
               let password = this.password ? this.password : this.user.password
               //alert("cadastrando")
+
+              if(this.email != this.user.email){
+                let id = await http.get("/users/filter?email=" + this.user.email);
+                if(id.data[0] != null){
+                  alert("Email já cadastrado!")
+                  this.user.email = this.email;
+                }else{
+                  let id = await http.put("/"+this.email, {
+                tpusuario: this.user.tpusuario,
+                email: this.user.email,
+                password: password
+              });
+              //alert(this.user.idusuario)
+              await http
+                .put("/fisico/"+this.user.idusuario, {
+                  fk_id_usuario: this.user.idusuario,
+                  id_usu_fisico: this.pessoa.id_usu_fisico,
+                  sexo: this.pessoa.sexo,
+                  cpf: this.pessoa.cpf,
+                  data_nascimento: d,
+                  nome: this.pessoa.nome
+                })
+                .catch(function() {
+                });
+                
+              await http.put("/endereco/" + this.user.idusuario, {
+                fk_id_usuario: this.user.idusuario,
+                id_endereco : this.endereco.id_endereco,
+                rua: this.endereco.rua,
+                numero: this.endereco.numero,
+                complemento: this.endereco.complemento,
+                cep: this.endereco.cep
+              });
+              alert("Cadastro realizado com sucesso");
+              this.email = this.user.email;
+
+                }
+              }else{
               let id = await http.put("/"+this.email, {
                 tpusuario: this.user.tpusuario,
                 email: this.user.email,
@@ -177,6 +216,8 @@ export default {
               });
               alert("Cadastro realizado com sucesso");
               this.email = this.user.email;
+              }
+              
             }
           }
           

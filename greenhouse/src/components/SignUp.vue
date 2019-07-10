@@ -306,7 +306,7 @@ export default {
                 alert("Informe um numero valido");
               } else {
                 this.encodeEmail()
-     
+     alert("juridico")
                 let id = await http.post("/adduser", {
                   tpusuario: this.selected,
                   email: this.email,
