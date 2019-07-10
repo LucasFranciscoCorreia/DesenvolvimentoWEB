@@ -13,9 +13,9 @@ import java.util.Objects;
 @Table(name="fisico")
 public class PessoaFisica {
 
-    @Id
-    @GeneratedValue(generator = "increment",strategy = GenerationType.AUTO)
-    @GenericGenerator(name = "increment", strategy = "increment")
+  @Id
+  @GeneratedValue(generator = "increment")
+  @GenericGenerator(name = "increment", strategy = "increment")
     @Column(name = "id_usu_fisico", unique = true, nullable = false)
     private Long id_usu_fisico;
 

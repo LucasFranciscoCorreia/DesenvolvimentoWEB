@@ -6,6 +6,7 @@ import br.ufrpe.greenhouse.service.FisicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Null;
 import java.util.List;
 
 @CrossOrigin
@@ -22,7 +23,19 @@ public class PessoaFisicaController {
     public PessoaFisica readFisico(@PathVariable Long id) throws Exception{
         return this.service.read(id);
     }
+  @PutMapping(path ="/fisico/{id}")
+  public PessoaFisica updateCustomer(@RequestBody PessoaFisica usuario, @PathVariable Long id)throws Exception {
 
+    PessoaFisica customerOptional = this.service.read(id);
+
+    if (customerOptional == null)
+      throw new Exception("Usuario não cadastrado");
+
+    usuario.setFk_id_usuario(id);
+    this.service.insert(usuario);
+
+    return usuario;
+  }
 
     @PostMapping(value = "/addfisico")
     public void addFisico(@RequestBody PessoaFisica pf) throws Exception{

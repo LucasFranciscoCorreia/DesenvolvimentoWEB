@@ -4,10 +4,12 @@ import br.ufrpe.greenhouse.entities.Pedido;
 import br.ufrpe.greenhouse.entities.Usuario;
 import br.ufrpe.greenhouse.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -41,7 +43,19 @@ public class UsuarioController {
             throw new Exception("Usuario ja cadastrado");
         return user.getIdusuario();
     }
+  @PutMapping(path ="/{email}")
+  public Usuario updateCustomer(@RequestBody Usuario usuario, @PathVariable String email)throws Exception {
 
+    List<Usuario> customerOptional = this.service.filterBy(email);
+
+    if (customerOptional.isEmpty())
+      throw new Exception("Usuario não cadastrado");
+
+    usuario.setIdusuario(customerOptional.get(0).getIdusuario());
+    this.service.insert(usuario);
+
+    return usuario;
+  }
     @DeleteMapping(value = "/removeuser/{id}")
     public void removeUser(@PathVariable Long id) {
         this.service.drop(id);

@@ -272,8 +272,6 @@ import ServicoLogado from "./components/ServicoLogado.vue";
 import ProdutoLogado from "./components/ProdutoLogado.vue";
 
 import http from "./http-common";
-
-
 class Item {
   constructor(nome, preco, srcPhoto, qtd, id) {
     this.nome = nome;
@@ -318,27 +316,42 @@ export default {
     };
   },
   methods: {
+    encodeURL(url) {
+      var uri = url;
+      url = encodeURIComponent(uri);
+    },
     async login() {
       if (this.email && this.password) {
-        let id = await http.get("/users/filter?email=" + this.email);
+        var uri = this.email
+        var encodedEmail = encodeURIComponent(uri);
+        let id = await http.get("/users/filter?email=" + encodedEmail);
         id = id.data[0];
+        //alert(id)
         if (id.password == this.password) {
           this.user = id;
           this.selected = "MinhaConta";
           
-          await http
+          this.pessoa = await http
             .get("/fisicos/id/" + id.idusuario)
-            .then(response => {
+            /*.then(response => {
               this.pessoa = response.data;
-            }); 
-          await http
+            });*/ 
+          
+          this.pessoa = this.pessoa.data
+         // alert(this.pessoa.nome)
+
+         // alert(JSON.stringify(ppl.data.nome))
+          this.endereco = await http
             .get("/enderecos/id/" + id.idusuario)
-            .then(response => {
+            /*.then(response => {
               this.endereco = response.data;
-            });
+            });*/
+            this.endereco = this.endereco.data
           console.log(this.user);
           console.log(this.pessoa);
           console.log(this.endereco);
+
+          
         } else {
           alert("email ou senha incorreta");
         }

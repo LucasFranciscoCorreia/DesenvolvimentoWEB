@@ -199,6 +199,7 @@ export default {
             if (d[0].length != 2 || d[1].length != 2 || d[2].length != 4) {
               alert("Insira uma data valida");
             } else {
+
               d = d[2] + "/" + d[1] + "/" + d[0];
               let id = await http.post("/adduser", {
                 tpusuario: this.selected,
@@ -304,6 +305,8 @@ export default {
               } else if (this.numero <= 0) {
                 alert("Informe um numero valido");
               } else {
+                this.encodeEmail()
+     
                 let id = await http.post("/adduser", {
                   tpusuario: this.selected,
                   email: this.email,

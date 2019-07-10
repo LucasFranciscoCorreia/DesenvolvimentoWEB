@@ -1,6 +1,7 @@
 package br.ufrpe.greenhouse.controller;
 
 import br.ufrpe.greenhouse.entities.Endereco;
+import br.ufrpe.greenhouse.entities.PessoaFisica;
 import br.ufrpe.greenhouse.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,4 +34,18 @@ public class EnderecoController {
         }
         return end.getId_endereco();
     }
+
+  @PutMapping(path ="/endereco/{id}")
+  public Endereco updateCustomer(@RequestBody Endereco endereco, @PathVariable Long id)throws Exception {
+
+    Endereco customerOptional = this.service.read(id);
+
+    if (customerOptional == null)
+      throw new Exception("Endereco não cadastrado");
+
+    endereco.setFk_id_usuario(id);
+    this.service.insert(endereco);
+
+    return endereco;
+  }
 }

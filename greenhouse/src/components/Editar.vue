@@ -81,7 +81,8 @@ export default {
   name: "Editar",
   data: () => {
     return {
-    password: ""
+    password: "",
+    email:""
     };
   },
   props: {
@@ -91,19 +92,19 @@ export default {
   },
   methods: {
     async salvar() {
+      this.password = this.password ? this.password : this.user.password
       if (this.user.tpusuario == "F") {
         if (
           this.user.email &&
           this.pessoa.nome &&
-          this.pessoa.CPF &&
+          this.pessoa.cpf &&
           this.pessoa.data_nascimento &&
-          this.endereco.CEP &&
-          this.endereco.endereco &&
+          this.endereco.cep &&
+          this.endereco.rua &&
           this.endereco.numero &&
           this.endereco.complemento
         ) {
-          if (this.password) {
-            if (this.password.length < 5 || this.password.length > 15) {
+          if (this.password.length < 5 || this.password.length > 15) {
               if (this.password.length < 5) {
                 alert(
                   "Senha muito curta\nPreencha com pelo menos 5 caracteres"
@@ -111,14 +112,14 @@ export default {
               } else {
                 alert("Senha muito longa");
               }
-            }
+            
           } else if (this.pessoa.nome.length < 5 || this.pessoa.nome.length > 30) {
             if (this.pessoa.nome.length < 5) {
               alert("Nome muito curto\n R U a robot?");
             } else {
               alert("Nome muito longo");
             }
-          } else if (this.pessoa.CPF.length != 11) {
+          } else if (this.pessoa.cpf.length != 11) {
             alert("CPF invalido");
           } else if (this.pessoa.data_nascimento.length != 10) {
             alert("Informe uma data valida");
@@ -131,47 +132,55 @@ export default {
           } else if (this.endereco.numero < 1) {
             alert("Informe um numero valido");
           } else if (
-            this.endereco.complemento.length < 5 ||
+            this.endereco.complemento.length < 3 ||
             this.endereco.complemento.length > 50
           ) {
-            if (this.enderecocomplemento.length < 5) {
+            if (this.endereco.complemento.length < 3) {
               alert("Complemento muito pequeno");
             } else {
               alert("Complemento muito longo");
             }
           } else {
-            let d = this.pessoa.data_nascimento.split("-");
+             let d = this.pessoa.data_nascimento.split("/");
             if (d[0].length != 2 || d[1].length != 2 || d[2].length != 4) {
               alert("Insira uma data valida");
             } else {
-              d = d[2] + "-" + d[1] + "-" + d[0];
-              let password = this.password ? this.password : user.password
-              let id = await http.post("/adduser", {
+              let d = this.pessoa.data_nascimento.split("/");
+              d = d[2] + "/" + d[1] + "/" + d[0];
+              let password = this.password ? this.password : this.user.password
+              //alert("cadastrando")
+              let id = await http.put("/"+this.email, {
                 tpusuario: this.user.tpusuario,
                 email: this.user.email,
                 password: password
               });
+              //alert(this.user.idusuario)
               await http
-                .post("/addfisico", {
-                  fk_id_usuario: id.data,
+                .put("/fisico/"+this.user.idusuario, {
+                  fk_id_usuario: this.user.idusuario,
+                  id_usu_fisico: this.pessoa.id_usu_fisico,
                   sexo: this.pessoa.sexo,
-                  cpf: this.pessoa.CPF,
+                  cpf: this.pessoa.cpf,
                   data_nascimento: d,
                   nome: this.pessoa.nome
                 })
                 .catch(function() {
-                  http.delete("/removeuser/" + id.data);
                 });
-              await http.post("/addendereco", {
-                fk_id_usuario: id.data,
-                rua: this.endereco,
-                numero: this.numero,
-                complemento: this.complemento,
-                cep: this.CEP
+                
+              await http.put("/endereco/" + this.user.idusuario, {
+                fk_id_usuario: this.user.idusuario,
+                id_endereco : this.endereco.id_endereco,
+                rua: this.endereco.rua,
+                numero: this.endereco.numero,
+                complemento: this.endereco.complemento,
+                cep: this.endereco.cep
               });
               alert("Cadastro realizado com sucesso");
+              this.email = this.user.email;
             }
           }
+          
+
         } else {
           alert("Preencha todos os campos corretamente");
         }
@@ -270,6 +279,9 @@ export default {
         }
       }
     }
+  },
+  mounted(){
+    this.email = this.user.email;
   }
 };
 </script>
